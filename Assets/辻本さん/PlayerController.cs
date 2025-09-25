@@ -5,22 +5,34 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 	[SerializeField] GameObject climber;
-	[SerializeField] float speed;
+	[SerializeField] float walkspeed;
 	[SerializeField] float junpSpeed;
 	[SerializeField] float gravity;
 	[SerializeField] GameObject cam;
 
+	[SerializeField] float climbSpeed = 3.0f;
+
+	enum State
+	{
+		Walk,
+		Climb
+	}
+
+	State state;
 	Quaternion cameraRot, characterRot;
 	float Xsensityvity = 3f, Ysensityvity = 3f;
-	bool move;
-	bool cursorLock = true;
+	bool isClimbing = false;
+	
+
+
 
 	//変数の宣言(角度の制限用)
-	float minX = -90f, maxX = 90f;
+	float minX = -80f, maxX = 80f;
 
 	private Vector3 moveDirection = Vector3.zero;
 
-	Rigidbody rb;	
+	Rigidbody rb;
+	Collider climbCollider;
 	Animator animator;
     // Start is called before the first frame update
     void Start()
@@ -29,6 +41,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 		cameraRot = cam.transform.localRotation;
 		characterRot = transform.localRotation;
+		state = State.Walk;
 	}
 
     // Update is called once per frame
@@ -45,61 +58,54 @@ public class PlayerController : MonoBehaviour
 
 		cam.transform.localRotation = cameraRot;
 		transform.localRotation = characterRot;
-
-
-		UpdateCursorLock();
-
-		// Wキー（前方移動）
-		if (Input.GetKey(KeyCode.W))
+		if(state == State.Walk)
 		{
-			rb.velocity = transform.forward * speed;
-			animator.SetBool("Walk", true);
+			// Wキー（前方移動）
+			if (Input.GetKey(KeyCode.W))
+			{
+				rb.velocity = transform.forward * walkspeed;
+				animator.SetBool("Walk", true);
+			}
+			// Sキー（後方移動）
+			else if (Input.GetKey(KeyCode.S))
+			{
+				rb.velocity = -transform.forward * walkspeed;
+			}
+			// Dキー（右移動）
+			else if (Input.GetKey(KeyCode.D))
+			{
+				rb.velocity = transform.right * walkspeed;
+			}
+			// Aキー（左移動）
+			else if (Input.GetKey(KeyCode.A))
+			{
+				rb.velocity = -transform.right * walkspeed;
+			}
+			else
+			{
+				rb.velocity = Vector3.zero;
+				animator.SetBool("Walk", false);
+			}
+
+		}
+
+		
+		if (isClimbing && Input.GetMouseButton(0))
+		{
+			state = State.Climb;
+			Debug.Log("入った");
+			animator.SetBool("Climb", true);
+			Climb();
 		}
 		else
 		{
-			animator.SetBool("Walk", false);
+			state = State.Walk;
+			animator.SetBool("Climb", false);
+			rb.useGravity = true;
 		}
 
-		// Sキー（後方移動）
-		if (Input.GetKey(KeyCode.S))
-		{
-			rb.velocity = -transform.forward * speed;
-		}
-
-		// Dキー（右移動）
-		if (Input.GetKey(KeyCode.D))
-		{
-			rb.velocity = transform.right * speed;
-		}
-
-		// Aキー（左移動）
-		if (Input.GetKey(KeyCode.A))
-		{
-			rb.velocity = -transform.right * speed;
-		}
 	}
 
-	public void UpdateCursorLock()
-	{
-		if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			cursorLock = false;
-		}
-		else if (Input.GetMouseButton(0))
-		{
-			cursorLock = true;
-		}
-
-
-		if (cursorLock)
-		{
-			Cursor.lockState = CursorLockMode.Locked;
-		}
-		else if (!cursorLock)
-		{
-			Cursor.lockState = CursorLockMode.None;
-		}
-	}
 
 	//角度制限関数の作成
 	public Quaternion ClampRotation(Quaternion q)
@@ -118,5 +124,42 @@ public class PlayerController : MonoBehaviour
 		q.x = Mathf.Tan(angleX * Mathf.Deg2Rad * 0.5f);
 
 		return q;
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if(other.CompareTag("ClimbWall"))
+		{
+			isClimbing = true;
+			climbCollider = other;
+			
+		}
+	}
+
+	private void OnTriggerExit(Collider other)
+	{
+		if(other == climbCollider)
+		{
+			isClimbing = false;
+			
+		}
+	}
+
+	private void Climb()
+	{
+		
+		rb.useGravity = false;
+		float verticalInput = Input.GetAxis("Vertical");
+		Vector3 climbDirection = new Vector3(0, verticalInput * climbSpeed, 0);
+		rb.velocity = climbDirection;
+
+		if (verticalInput <= 0)
+		{
+			animator.SetFloat("StopClimb", 0.0f);
+		}
+		else
+		{
+			animator.SetFloat("StopClimb", 1.0f);
+		}
 	}
 }
