@@ -33,6 +33,14 @@ public class HP : MonoBehaviour
 		}
 	}
 
+	private void OnTriggerEnter(Collider collision)
+	{
+		if(collision.gameObject.tag=="recover")
+		{
+			HpBar.value += 10;
+			Destroy(collision.gameObject);
+		}
+	}
 	void OnDie()
 	{
 		onDieCallback.Invoke();
