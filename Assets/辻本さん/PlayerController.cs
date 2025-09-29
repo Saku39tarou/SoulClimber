@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
 		transform.localRotation = characterRot;
 		if(state == State.Walk)
 		{
+			float veloY = rb.velocity.y;
 			// Wキー（前方移動）
 			if (Input.GetKey(KeyCode.W))
 			{
@@ -86,6 +87,7 @@ public class PlayerController : MonoBehaviour
 				rb.velocity = Vector3.zero;
 				animator.SetBool("Walk", false);
 			}
+			rb.velocity = new Vector3(rb.velocity.x, veloY, rb.velocity.z);
 
 		}
 
