@@ -1116,6 +1116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7519583867206020141}
   - component: {fileID: 5973206460990471878}
+  - component: {fileID: 1570301577768966081}
   m_Layer: 0
   m_Name: Tent_op
   m_TagString: Tent
@@ -1132,7 +1133,7 @@ Transform:
   m_GameObject: {fileID: 7090415751809740201}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.75, y: 0.5, z: -11.210904}
+  m_LocalPosition: {x: -11.680267, y: 0.5, z: -11.210904}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1173,6 +1174,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: -1, y: 0.5, z: 0}
+--- !u!114 &1570301577768966081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7090415751809740201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 840cce386d3aa5b44b78ee2e1957283f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  climbPlayer: {fileID: 0}
+  ghostPlayer: {fileID: 0}
 --- !u!1 &9053248846036844969
 GameObject:
   m_ObjectHideFlags: 0
