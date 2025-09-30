@@ -22,9 +22,7 @@ public class PlayerController : MonoBehaviour
 	Quaternion cameraRot, characterRot;
 	float Xsensityvity = 3f, Ysensityvity = 3f;
 	bool isClimbing = false;
-	
-
-
+	bool isGround = false;
 
 	//変数の宣言(角度の制限用)
 	float minX = -80f, maxX = 80f;
@@ -58,7 +56,7 @@ public class PlayerController : MonoBehaviour
 
 		cam.transform.localRotation = cameraRot;
 		transform.localRotation = characterRot;
-		if(state == State.Walk)
+		if(state == State.Walk && isGround)
 		{
 			float veloY = rb.velocity.y;
 			// Wキー（前方移動）
@@ -66,6 +64,7 @@ public class PlayerController : MonoBehaviour
 			{
 				rb.velocity = transform.forward * walkspeed;
 				animator.SetBool("Walk", true);
+
 			}
 			// Sキー（後方移動）
 			else if (Input.GetKey(KeyCode.S))
@@ -86,6 +85,7 @@ public class PlayerController : MonoBehaviour
 			{
 				rb.velocity = Vector3.zero;
 				animator.SetBool("Walk", false);
+				
 			}
 			rb.velocity = new Vector3(rb.velocity.x, veloY, rb.velocity.z);
 
@@ -94,15 +94,16 @@ public class PlayerController : MonoBehaviour
 		
 		if (isClimbing && Input.GetMouseButton(0))
 		{
-			state = State.Climb;
+			
 			Debug.Log("入った");
-			animator.SetBool("Climb", true);
+			
 			Climb();
 		}
 		else
 		{
 			state = State.Walk;
-			animator.SetBool("Climb", false);
+			animator.SetBool("ClimbUp", false);
+			animator.SetBool("ClimbDown", false);
 			rb.useGravity = true;
 		}
 
@@ -132,7 +133,9 @@ public class PlayerController : MonoBehaviour
 	{
 		if(other.CompareTag("ClimbWall"))
 		{
+			state = State.Climb;
 			isClimbing = true;
+			
 			climbCollider = other;
 			
 		}
@@ -147,20 +150,44 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
+	private void OnCollisionEnter(Collision collision)
+	{
+		if (collision.gameObject.CompareTag("Floor"))
+		{
+			isGround = true;
+		}
+	}
+
+	private void OnCollisionExit(Collision collision)
+	{
+		if (collision.gameObject.CompareTag("Floor"))
+		{
+			isGround = false;
+		}
+	}
+
 	private void Climb()
 	{
-		
+		isGround = false;
 		rb.useGravity = false;
 		float verticalInput = Input.GetAxis("Vertical");
 		Vector3 climbDirection = new Vector3(0, verticalInput * climbSpeed, 0);
 		rb.velocity = climbDirection;
 
-		if (verticalInput <= 0)
+		if (verticalInput == 0)
 		{
 			animator.SetFloat("StopClimb", 0.0f);
 		}
+		else if (verticalInput > 0)
+		{
+			animator.SetBool("ClimbUp", true);
+			animator.SetBool("ClimbDown", false);
+			animator.SetFloat("StopClimb", 1.0f);
+		}
 		else
 		{
+			animator.SetBool("ClimbDown", true);
+			animator.SetBool("ClimbUp", false);
 			animator.SetFloat("StopClimb", 1.0f);
 		}
 	}
