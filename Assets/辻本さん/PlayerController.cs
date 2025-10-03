@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 	float Xsensityvity = 3f, Ysensityvity = 3f;
 	bool isClimbing = false;
 	bool isGround = false;
+	bool isJumping = false;
 
 	//•Ï”‚ÌéŒ¾(Šp“x‚Ì§ŒÀ—p)
 	float minX = -80f, maxX = 80f;
@@ -88,7 +89,11 @@ public class PlayerController : MonoBehaviour
 				
 			}
 			rb.velocity = new Vector3(rb.velocity.x, veloY, rb.velocity.z);
-
+			if(!isJumping && Input.GetKeyDown(KeyCode.Space))
+			{
+				rb.velocity = Vector3.up * junpSpeed;
+				isJumping = true;
+			}
 		}
 
 		
@@ -143,7 +148,9 @@ public class PlayerController : MonoBehaviour
 		if (other.gameObject.CompareTag("Floor"))
 		{
 			isGround = true;
+			isJumping = false;
 		}
+			
 	}
 
 	private void OnTriggerExit(Collider other)
