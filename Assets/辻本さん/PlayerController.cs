@@ -153,14 +153,14 @@ public class PlayerController : MonoBehaviour
 			
 	}
 
-	private void OnTriggerExit(Collider other)
-	{
-		if(other == climbCollider)
-		{
-			isClimbing = false;
+	//private void OnTriggerExit(Collider other)
+	//{
+	//	if(other == climbCollider)
+	//	{
+	//		isClimbing = false;
 			
-		}
-	}
+	//	}
+	//}
 
 	/*private void OnCollisionEnter(Collision collision)
 	{
@@ -175,6 +175,11 @@ public class PlayerController : MonoBehaviour
 		if (collision.gameObject.CompareTag("Floor"))
 		{
 			isGround = false;
+		}
+
+		if (collision.gameObject.CompareTag("ClimbWall"))
+		{
+			isClimbing = false;
 		}
 	}
 
