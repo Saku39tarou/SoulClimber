@@ -129,15 +129,20 @@ public class PlayerController : MonoBehaviour
 		return q;
 	}
 
-	private void OnTriggerEnter(Collider other)
+	private void OnCollisionEnter(Collision other)
 	{
-		if(other.CompareTag("ClimbWall"))
+		if(other.gameObject.CompareTag("ClimbWall"))
 		{
 			state = State.Climb;
 			isClimbing = true;
 			
-			climbCollider = other;
+			//climbCollider = other;
 			
+		}
+
+		if (other.gameObject.CompareTag("Floor"))
+		{
+			isGround = true;
 		}
 	}
 
@@ -150,13 +155,13 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	private void OnCollisionEnter(Collision collision)
+	/*private void OnCollisionEnter(Collision collision)
 	{
 		if (collision.gameObject.CompareTag("Floor"))
 		{
 			isGround = true;
 		}
-	}
+	}*/
 
 	private void OnCollisionExit(Collision collision)
 	{

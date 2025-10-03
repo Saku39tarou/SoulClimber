@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
 			rigid.velocity = Vector3.up * jump;//ジャンプ速度
 			isjumpPower = true;
 		}
-
+		
 	}
 	//2段ジャンプ禁止（空中で出来ないようにする）
 	private void OnCollisionEnter(Collision collision)//衝突したら・・・
