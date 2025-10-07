@@ -21,9 +21,9 @@ public class PlayerController : MonoBehaviour
 	State state;
 	Quaternion cameraRot, characterRot;
 	float Xsensityvity = 3f, Ysensityvity = 3f;
-	bool isClimbing = false;
-	bool isGround = false;
-	bool isJumping = false;
+	[SerializeField] bool isClimbing = false;
+	[SerializeField] bool isGround = false;
+	[SerializeField] bool isJumping = false;
 
 	//•Ï”‚ÌéŒ¾(Šp“x‚Ì§ŒÀ—p)
 	float minX = -80f, maxX = 80f;
