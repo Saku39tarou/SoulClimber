@@ -9,6 +9,8 @@ TagManager:
   - recover
   - ClimbWall
   - Tent
+  - NOrecover
+  - ground
   layers:
   - Default
   - TransparentFX

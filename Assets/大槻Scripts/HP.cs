@@ -45,6 +45,15 @@ public class HP : MonoBehaviour
 			HpBar.value += 10;
 			Destroy(collision.gameObject);
 		}
+		if(collision.gameObject.tag=="NOrecover")
+		{
+			HpBar.value -= 10;
+			Destroy(collision.gameObject);
+		}
+		if(collision.gameObject.tag=="ground")
+		{
+			HpBar.value -= 10;
+		}
 	}
 
 	public void TakeDamage(int damage)
