@@ -235,12 +235,15 @@ public class Weather_Thunderstorm : Weather_Base
         base.Init();
         TurnOnRain();
 
-        // We turn on emission on the particle system as we always turn it off in the end
-        if (_gPartRain != null)
-            _gPartRain.GetComponent<ParticleSystem>().enableEmission = true;
+		// We turn on emission on the particle system as we always turn it off in the end
+		if (_gPartRain != null)
+		{
+			var emission = _gPartRain.GetComponent<ParticleSystem>().emission;
+			emission.enabled = true;
+		}
 
-        // Create the lighting component and components needs for it
-        _gLighting = new GameObject("ThunderLighting");
+		// Create the lighting component and components needs for it
+		_gLighting = new GameObject("ThunderLighting");
         _gLighting.AddComponent<Light>();
         _gLighting.AddComponent<AudioSource>();
 
@@ -451,9 +454,10 @@ public class Weather_Thunderstorm : Weather_Base
         if (_gPartRain != null && _gPartRain.activeInHierarchy == true)
         {
             _fEndParticleTimerStart += Time.deltaTime;
-            _gPartRain.GetComponent<ParticleSystem>().enableEmission = false;
+			var emission = _gPartRain.GetComponent<ParticleSystem>().emission;
+			emission.enabled = false;
 
-            _fTimerForNextLighting = 0.0f;
+			_fTimerForNextLighting = 0.0f;
             _fTimeForNextLighting = 0.0f;
 
             if (_gLighting != null)

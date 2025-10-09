@@ -442,17 +442,30 @@ public class Weather_Controller : MonoBehaviour
             gTimeOfDay.GetComponent<ToD_Base>().lMoon.color = Color.Lerp(gTimeOfDay.GetComponent<ToD_Base>().lMoon.color, moonLightColor, Time.deltaTime / fadeTime);
         }
 
-        // Skybox settings
-        if (_bUsingProceduralSkybox == false)
-            RenderSettings.skybox.SetColor("_Tint", Color.Lerp(RenderSettings.skybox.GetColor("_Tint"), skyTint, Time.deltaTime / fadeTime));
-        else
-        {
-            RenderSettings.skybox.SetColor("_SkyTint", Color.Lerp(RenderSettings.skybox.GetColor("_SkyTint"), skyTint, Time.deltaTime / fadeTime));
-            RenderSettings.skybox.SetColor("_GroundColor", Color.Lerp(RenderSettings.skybox.GetColor("_GroundColor"), skyGround, Time.deltaTime / fadeTime));
-        }
+		// Skybox settings
+		if (RenderSettings.skybox == null)
+			return;
 
-        // Cloud settings
-        if (matClouds != null)
+		if (RenderSettings.skybox.HasProperty("_SkyTint"))
+		{
+			RenderSettings.skybox.SetColor("_SkyTint",
+				Color.Lerp(RenderSettings.skybox.GetColor("_SkyTint"), skyTint, Time.deltaTime / fadeTime));
+
+			if (RenderSettings.skybox.HasProperty("_GroundColor"))
+			{
+				RenderSettings.skybox.SetColor("_GroundColor",
+					Color.Lerp(RenderSettings.skybox.GetColor("_GroundColor"), skyGround, Time.deltaTime / fadeTime));
+			}
+		}
+		else if (RenderSettings.skybox.HasProperty("_Tint"))
+		{
+			RenderSettings.skybox.SetColor("_Tint",
+				Color.Lerp(RenderSettings.skybox.GetColor("_Tint"), skyTint, Time.deltaTime / fadeTime));
+		}
+
+
+		// Cloud settings
+		if (matClouds != null)
             matClouds.color = Color.Lerp(matClouds.color, cloudColor, Time.deltaTime / fadeTime);
         else
             Debug.LogWarning("We have no cloud material attached to:" + this.gameObject);
@@ -475,6 +488,16 @@ public class Weather_Controller : MonoBehaviour
     /// <param name="CurrParticles">Particle system</param>
     public void ActivateTimesetParticle(GameObject CurrParticles)
     {
+        if(CurrParticles == null)return;
+
+        ParticleSystem ps = CurrParticles.GetComponent<ParticleSystem>();
+        if(ps != null)
+        {
+            var emission = ps.emission;
+            emission.enabled = true;
+        }
+
+        /*
         if (CurrParticles != null)
         {
             if (CurrParticles.gameObject.GetComponent<ParticleSystem>() != false)
@@ -504,6 +527,7 @@ public class Weather_Controller : MonoBehaviour
             }
 
         }
+        */
     }
 
     /// <summary>
@@ -511,37 +535,46 @@ public class Weather_Controller : MonoBehaviour
     /// </summary>
     /// <param name="CurrParticles">Particle system</param>
     public void DeactivateTimesetParticle(GameObject CurrParticles)
-    {
-        if (CurrParticles != null)
+	{
+		if (CurrParticles == null) return;
+
+		var ps = CurrParticles.GetComponent<ParticleSystem>();
+        if (ps != null)
         {
-            if (CurrParticles.gameObject.GetComponent<ParticleSystem>() != false)
-            {
-                if (CurrParticles.gameObject.GetComponent<ParticleSystem>().enableEmission == true)
-                {
-                    CurrParticles.gameObject.GetComponent<ParticleSystem>().enableEmission = false;
-
-                    if (CurrParticles.transform.childCount != 0)
-                    {
-                        for (int iii = 0; iii < CurrParticles.transform.childCount; ++iii)
-                        {
-                            CurrParticles.transform.GetChild(iii).gameObject.GetComponent<ParticleSystem>().enableEmission = false;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if (CurrParticles.transform.childCount != 0)
-                {
-                    for (int iii = 0; iii < CurrParticles.transform.childCount; ++iii)
-                    {
-                        CurrParticles.transform.GetChild(iii).gameObject.GetComponent<ParticleSystem>().enableEmission = false;
-                    }
-                }
-            }
-
+            var emission = ps.emission;
+            emission.enabled = false;
         }
-    }
+			/*
+			if (CurrParticles != null)
+			{
+				if (CurrParticles.gameObject.GetComponent<ParticleSystem>() != false)
+				{
+					if (CurrParticles.gameObject.GetComponent<ParticleSystem>().enableEmission == true)
+					{
+						CurrParticles.gameObject.GetComponent<ParticleSystem>().enableEmission = false;
+
+						if (CurrParticles.transform.childCount != 0)
+						{
+							for (int iii = 0; iii < CurrParticles.transform.childCount; ++iii)
+							{
+								CurrParticles.transform.GetChild(iii).gameObject.GetComponent<ParticleSystem>().enableEmission = false;
+							}
+						}
+					}
+				}
+				else
+				{
+					if (CurrParticles.transform.childCount != 0)
+					{
+						for (int iii = 0; iii < CurrParticles.transform.childCount; ++iii)
+						{
+							CurrParticles.transform.GetChild(iii).gameObject.GetComponent<ParticleSystem>().enableEmission = false;
+						}
+					}
+				}
+			}
+			*/
+		}
 
     public void UseWeatherTypeDebug(int WeatherType)
     {
