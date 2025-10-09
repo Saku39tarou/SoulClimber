@@ -12,13 +12,14 @@ public class PlayerController : MonoBehaviour
 
 	[SerializeField] float climbSpeed = 3.0f;
 
-	enum State
+	public enum State
 	{
 		Walk,
-		Climb
+		Climb,
+		Ghost,
 	}
 
-	State state;
+	[SerializeField] State state;
 	Quaternion cameraRot, characterRot;
 	float Xsensityvity = 3f, Ysensityvity = 3f;
 	[SerializeField] bool isClimbing = false;
@@ -96,6 +97,10 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 
+		if(state == State.Ghost)
+		{
+			Ghost();
+		}
 		
 		if (isClimbing && Input.GetMouseButton(0))
 		{
@@ -106,10 +111,9 @@ public class PlayerController : MonoBehaviour
 		}
 		else
 		{
-			state = State.Walk;
 			animator.SetBool("ClimbUp", false);
 			animator.SetBool("ClimbDown", false);
-			rb.useGravity = true;
+			
 		}
 
 	}
@@ -180,6 +184,8 @@ public class PlayerController : MonoBehaviour
 		if (collision.gameObject.CompareTag("ClimbWall"))
 		{
 			isClimbing = false;
+			rb.useGravity = true;
+			state = State.Walk;
 		}
 	}
 
@@ -206,6 +212,46 @@ public class PlayerController : MonoBehaviour
 			animator.SetBool("ClimbDown", true);
 			animator.SetBool("ClimbUp", false);
 			animator.SetFloat("StopClimb", 1.0f);
+		}
+	}
+
+	private void Ghost()
+	{
+		isGround = false;
+		rb.useGravity = false;
+		// Wキー（前方移動）
+		if (Input.GetKey(KeyCode.W))
+		{
+			rb.velocity = transform.forward * walkspeed;
+			animator.SetBool("Walk", true);
+
+		}
+		// Sキー（後方移動）
+		else if (Input.GetKey(KeyCode.S))
+		{
+			rb.velocity = -transform.forward * walkspeed;
+		}
+		// Dキー（右移動）
+		else if (Input.GetKey(KeyCode.D))
+		{
+			rb.velocity = transform.right * walkspeed;
+		}
+		// Aキー（左移動）
+		else if (Input.GetKey(KeyCode.A))
+		{
+			rb.velocity = -transform.right * walkspeed;
+		}
+		else if(Input.GetKey(KeyCode.F))
+		{
+			rb.velocity = transform.up * walkspeed;
+		}
+		else if(Input.GetKey(KeyCode.C))
+		{
+			rb.velocity = -transform.up * walkspeed;
+		}
+		else
+		{
+			rb.velocity = Vector3.zero;
 		}
 	}
 }

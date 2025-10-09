@@ -13,6 +13,7 @@ public class Tent : MonoBehaviour
 	void Start()
     {
         ghostPlayer.SetActive(false);
+		ghostPlayer.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -24,6 +25,7 @@ public class Tent : MonoBehaviour
 			Debug.Log("E‚ª‰Ÿ‚³‚ê‚½");
 			ghostPlayer.SetActive(true);
 			climbPlayer.SetActive(false);
+			
 		}
 
 	}
