@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -9,11 +11,13 @@ public class Tent : MonoBehaviour
 	[SerializeField] GameObject ghostPlayer;
 	bool onPlayer = false;
 
+	private PlayerController.State controller;
 	// Start is called before the first frame update
 	void Start()
     {
         ghostPlayer.SetActive(false);
 		ghostPlayer.GetComponent<PlayerController>();
+		
     }
 
     // Update is called once per frame
@@ -25,7 +29,6 @@ public class Tent : MonoBehaviour
 			Debug.Log("E‚ª‰Ÿ‚³‚ê‚½");
 			ghostPlayer.SetActive(true);
 			climbPlayer.SetActive(false);
-			
 		}
 
 	}
