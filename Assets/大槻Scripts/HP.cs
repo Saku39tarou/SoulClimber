@@ -7,9 +7,13 @@ using UnityEngine.Events;
 
 public class HP : MonoBehaviour
 {
+
 	[SerializeField] UnityEvent onDieCallback = new UnityEvent();
 	[SerializeField] int life=100;	
 	[SerializeField] Slider HpBar;
+
+	[SerializeField] float startFallY;
+	[SerializeField] int FallDamage=-1;	//プレイヤーが　m落ちたらダメージ
 
     void Start()
     {
@@ -20,13 +24,20 @@ public class HP : MonoBehaviour
 		}
     }
 
-    public void Damage(int damage)
+	//Rigidbodyで　地上の。
+	private void Update()
+	{
+		if(GetComponent<Rigidbody>().velocity.y<0 && !IsGrounded())
+		{
+			startFallY = transform.position.y;
+		}
+	}
+	
+	public void Damage(int damage)
 	{
 		if (life <= 0) return;
-
+		
 		life -= damage;
-
-
 
 		if(HpBar != null)
 		{
@@ -38,6 +49,7 @@ public class HP : MonoBehaviour
 		}
 	}
 
+	
 	private void OnTriggerEnter(Collider collision)
 	{
 		if(collision.gameObject.tag=="recover")
@@ -50,10 +62,23 @@ public class HP : MonoBehaviour
 			HpBar.value -= 10;
 			Destroy(collision.gameObject);
 		}
-		if(collision.gameObject.tag=="ground")
+
+		if (collision.gameObject.tag=="Ground")
+		{
+			float fallDistance = startFallY - transform.position.y; // 落下距離を計算
+			if (fallDistance > FallDamage)
+			{
+				// ダメージ計算と処理
+				HpBar.value -= 10; // 落下距離に応じてダメージを与える
+				//FallDamage -= 10;//
+			}
+			startFallY = transform.position.y; // 落下開始時の高さをリセット
+		}
+	
+		/*if(collision.gameObject.tag=="ground")
 		{
 			HpBar.value -= 10;
-		}
+		}*/
 	}
 
 	public void TakeDamage(int damage)
@@ -63,5 +88,10 @@ public class HP : MonoBehaviour
 	void OnDie()
 	{
 		onDieCallback.Invoke();
+	}
+	
+	private bool IsGrounded()
+	{
+		return false;
 	}
 }

@@ -11,6 +11,7 @@ TagManager:
   - Tent
   - NOrecover
   - ground
+  - Ground
   layers:
   - Default
   - TransparentFX
