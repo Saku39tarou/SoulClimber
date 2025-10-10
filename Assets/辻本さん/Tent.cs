@@ -9,6 +9,7 @@ public class Tent : MonoBehaviour
 {
 	[SerializeField] GameObject climbPlayer;
 	[SerializeField] GameObject ghostPlayer;
+	[SerializeField] GameObject waitPos;
 	bool onPlayer = false;
 	bool onGhost = false;
 
@@ -27,7 +28,8 @@ public class Tent : MonoBehaviour
 
 		if (onPlayer && Input.GetKeyDown(KeyCode.E))
 		{
-			Debug.Log("Eが押された");
+			Debug.Log("ノーマルでEが押された");
+			climbPlayer.transform.position = waitPos.transform.position;
 			ghostPlayer.SetActive(true);
 			climbPlayer.SetActive(false);
 			GameObject.FindWithTag("Ghost").GetComponent<PlayerController>().SetState(changeState);
@@ -36,7 +38,8 @@ public class Tent : MonoBehaviour
 
 		if (onGhost && Input.GetKeyDown(KeyCode.E))
 		{
-			Debug.Log("Eが押された");
+			Debug.Log("ゴーストでEが押された");
+			ghostPlayer.transform.position = waitPos.transform.position;
 			ghostPlayer.SetActive(false);
 			climbPlayer.SetActive(true);
 			GameObject.FindWithTag("Player").GetComponent<PlayerController>().SetState(changeState);

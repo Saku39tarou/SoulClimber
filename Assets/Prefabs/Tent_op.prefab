@@ -376,6 +376,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1258134029477796409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9210465144246091281}
+  m_Layer: 0
+  m_Name: PlayerWaitPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9210465144246091281
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258134029477796409}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.959, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7519583867206020141}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2025247776994447184
 GameObject:
   m_ObjectHideFlags: 0
@@ -1117,6 +1148,7 @@ GameObject:
   - component: {fileID: 7519583867206020141}
   - component: {fileID: 5973206460990471878}
   - component: {fileID: 1570301577768966081}
+  - component: {fileID: 5787670287291474913}
   m_Layer: 0
   m_Name: Tent_op
   m_TagString: Tent
@@ -1151,6 +1183,7 @@ Transform:
   - {fileID: 9216066606855872271}
   - {fileID: 4483437218450945303}
   - {fileID: 527622673436620443}
+  - {fileID: 9210465144246091281}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5973206460990471878
@@ -1188,6 +1221,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   climbPlayer: {fileID: 0}
   ghostPlayer: {fileID: 0}
+  changeState: 0
+--- !u!65 &5787670287291474913
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7090415751809740201}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 1.4, z: 2}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &9053248846036844969
 GameObject:
   m_ObjectHideFlags: 0
