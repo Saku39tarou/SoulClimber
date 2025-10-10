@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] GameObject cam;
 
 	[SerializeField] float climbSpeed = 3.0f;
+	[SerializeField] float wallCheckDistance = 0.6f;
 
 	public enum State
 	{
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
 	float minX = -80f, maxX = 80f;
 
 	private Vector3 moveDirection = Vector3.zero;
+	private Transform _transform;
 
 	Rigidbody rb;
 	Collider climbCollider;
@@ -37,6 +39,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+		_transform = transform;
 		animator = climber.GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
 		cameraRot = cam.transform.localRotation;
@@ -47,6 +50,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		// 正面にRayを飛ばして壁か判定
+		bool isTouchingWall = Physics.Raycast(_transform.position, _transform.forward, wallCheckDistance);
+
 		float xRot = Input.GetAxis("Mouse X") * Ysensityvity;
 		float yRot = Input.GetAxis("Mouse Y") * Xsensityvity;
 
@@ -102,7 +108,7 @@ public class PlayerController : MonoBehaviour
 			Ghost();
 		}
 		
-		if (isClimbing && Input.GetMouseButton(0))
+		if (isClimbing && isTouchingWall && Input.GetMouseButton(0))
 		{
 			
 			Debug.Log("入った");
@@ -258,5 +264,16 @@ public class PlayerController : MonoBehaviour
 	public void SetState(State st)
 	{
 		state = st;
+	}
+
+
+	// Rayのデバッグ用
+	private void OnDrawGizmosSelected()
+	{
+		if (_transform != null)
+		{
+			Gizmos.color = Color.red;
+			Gizmos.DrawRay(_transform.position, _transform.forward * wallCheckDistance);
+		}
 	}
 }
