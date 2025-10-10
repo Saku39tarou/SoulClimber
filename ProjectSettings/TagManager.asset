@@ -12,6 +12,7 @@ TagManager:
   - NOrecover
   - ground
   - Ground
+  - Ghost
   layers:
   - Default
   - TransparentFX

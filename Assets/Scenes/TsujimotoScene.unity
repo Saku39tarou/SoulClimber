@@ -764,6 +764,33 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 962827199}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1472931768 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7090415751809740201, guid: 97e31e30a45fd0f41822a6791eb71b3d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1611717443}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1472931772
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472931768}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 1.4, z: 2}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1001 &1591948523
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -916,6 +943,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1570301577768966081, guid: 97e31e30a45fd0f41822a6791eb71b3d,
         type: 3}
+      propertyPath: state
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1570301577768966081, guid: 97e31e30a45fd0f41822a6791eb71b3d,
+        type: 3}
+      propertyPath: changeState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1570301577768966081, guid: 97e31e30a45fd0f41822a6791eb71b3d,
+        type: 3}
       propertyPath: climbPlayer
       value: 
       objectReference: {fileID: 1367686795}
@@ -924,6 +961,11 @@ PrefabInstance:
       propertyPath: ghostPlayer
       value: 
       objectReference: {fileID: 798991694}
+    - target: {fileID: 5973206460990471878, guid: 97e31e30a45fd0f41822a6791eb71b3d,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7090415751809740201, guid: 97e31e30a45fd0f41822a6791eb71b3d,
         type: 3}
       propertyPath: m_Name
@@ -982,7 +1024,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7090415751809740201, guid: 97e31e30a45fd0f41822a6791eb71b3d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1472931772}
   m_SourcePrefab: {fileID: 100100000, guid: 97e31e30a45fd0f41822a6791eb71b3d, type: 3}
 --- !u!1001 &1716780125
 PrefabInstance:
@@ -1320,6 +1366,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GhostPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106563833247783263, guid: 6bf6a5a0cc1de7e44b17992406beaf5a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ghost
       objectReference: {fileID: 0}
     - target: {fileID: 2455833513642144424, guid: 6bf6a5a0cc1de7e44b17992406beaf5a,
         type: 3}

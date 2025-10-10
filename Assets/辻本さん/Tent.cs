@@ -10,15 +10,16 @@ public class Tent : MonoBehaviour
 	[SerializeField] GameObject climbPlayer;
 	[SerializeField] GameObject ghostPlayer;
 	bool onPlayer = false;
+	bool onGhost = false;
 
-	private PlayerController.State controller;
+	[SerializeField] PlayerController.State changeState;
 	// Start is called before the first frame update
 	void Start()
     {
         ghostPlayer.SetActive(false);
-		ghostPlayer.GetComponent<PlayerController>();
 		
-    }
+		
+	}
 
     // Update is called once per frame
     void Update()
@@ -29,6 +30,17 @@ public class Tent : MonoBehaviour
 			Debug.Log("E‚ª‰Ÿ‚³‚ê‚½");
 			ghostPlayer.SetActive(true);
 			climbPlayer.SetActive(false);
+			GameObject.FindWithTag("Ghost").GetComponent<PlayerController>().SetState(changeState);
+			changeState = PlayerController.State.Walk;
+		}
+
+		if (onGhost && Input.GetKeyDown(KeyCode.E))
+		{
+			Debug.Log("E‚ª‰Ÿ‚³‚ê‚½");
+			ghostPlayer.SetActive(false);
+			climbPlayer.SetActive(true);
+			GameObject.FindWithTag("Player").GetComponent<PlayerController>().SetState(changeState);
+			changeState = PlayerController.State.Ghost;
 		}
 
 	}
@@ -38,6 +50,11 @@ public class Tent : MonoBehaviour
 		if(other.gameObject.CompareTag("Player"))
 		{
 			onPlayer = true;
+		}
+
+		if(other.gameObject.CompareTag("Ghost"))
+		{
+			onGhost = true;
 		}
 	}
 }

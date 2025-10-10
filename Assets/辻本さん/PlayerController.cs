@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 	Collider climbCollider;
 	Animator animator;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
 		animator = climber.GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
@@ -253,5 +253,10 @@ public class PlayerController : MonoBehaviour
 		{
 			rb.velocity = Vector3.zero;
 		}
+	}
+	
+	public void SetState(State st)
+	{
+		state = st;
 	}
 }
