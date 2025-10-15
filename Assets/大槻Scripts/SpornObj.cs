@@ -11,7 +11,7 @@ public class SpornObj : MonoBehaviour
 		cubeObject.SetActive(false);
 		Invoke("CubeSet", 10.0f);
 	}
-	
+
 	void CubeSet()
 	{
 		cubeObject.SetActive(true);

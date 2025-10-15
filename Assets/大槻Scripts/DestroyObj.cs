@@ -13,7 +13,6 @@ public class DestroyObj : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		// Destory
 		Destroy(gameObject, time);
 	}
 
