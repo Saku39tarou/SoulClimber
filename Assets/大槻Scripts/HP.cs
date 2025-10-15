@@ -6,83 +6,71 @@ using TMPro;
 using UnityEngine.Events;
 
 public class HP : MonoBehaviour
-{
+{/*
+	public int healAmount = 20;
 
+	private void OnTriggerEnter(Collider other)
+	{
+		PlayerHealth health = other.GetComponent<PlayerHealth>();
+		if (health != null)
+		{
+			health.Heal(healAmount);
+			Destroy(gameObject); // 回復アイテムを消す
+		}
+	}*/
+
+
+	
 	[SerializeField] UnityEvent onDieCallback = new UnityEvent();
-	[SerializeField] int life=100;	
+	[SerializeField] float maxHp=100f;	
 	[SerializeField] Slider HpBar;
-
-	//[SerializeField] float startFallY;
-	//[SerializeField] int FallDamage;	//プレイヤーが　m落ちたらダメージ
 
     void Start()
     {
 	
         if(HpBar != null)
 		{
-			HpBar.value = life;
+			HpBar.value = maxHp;
 		}
     }
-
-	//Rigidbodyで　地上の。
-	/*private void Update()
-	{
-		if(GetComponent<Rigidbody>().velocity.y<0 && !IsGrounded())
-		{
-			startFallY = transform.position.y;
-		}
-	}*/
 	
-	public void Damage(int damage)
+	public void Damage(float damage)
 	{
-		if (life <= 0) return;
+		if (maxHp <= 0) return;
 		
-		life -= damage;
+		maxHp -= damage;
 
 		if(HpBar != null)
 		{
-			HpBar.value = life;
+			HpBar.value = maxHp;
 		}
-		if(life<=0)
+		if(maxHp<=0)
 		{
 			OnDie();
 		}
 	}
-
+	
 	
 	private void OnTriggerEnter(Collider collision)
 	{
 		//if(collision.gameObject.tag=="recover")
 		if(collision.CompareTag("recover"))
 		{
-			HpBar.value += 1;
+			HpBar.value +=1;
 			Destroy(collision.gameObject);
 		}
 		if(collision.CompareTag("NOrecover"))
 		{
-			HpBar.value -= 1;
+			HpBar.value -=1;
 			Destroy(collision.gameObject);
 		}
-
-		/*if (collision.CompareTag("Ground"))
-		{
-			float fallDistance = startFallY - transform.position.y; // 落下距離を計算
-			if (fallDistance > FallDamage)
-			{
-				// ダメージ計算と処理
-				HpBar.value -= 10; // 落下距離に応じてダメージを与える
-				//FallDamage -= 10;//
-			}
-			startFallY = transform.position.y; // 落下開始時の高さをリセット
-		}*/
+		
+		
 	
-		/*if(collision.gameObject.tag=="ground")
-		{
-			HpBar.value -= 10;
-		}*/
+	
 	}
 
-	public void TakeDamage(int damage)
+	public void TakeDamage(float damage)
 	{
 		HpBar.value -= damage;
 	}
@@ -95,4 +83,5 @@ public class HP : MonoBehaviour
 	{
 		return false;
 	}
+	
 }

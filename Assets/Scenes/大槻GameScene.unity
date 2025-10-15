@@ -608,12 +608,12 @@ PrefabInstance:
     - target: {fileID: 1029920197894851968, guid: 7b64f436d4d234446acee524d44365a8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.56
+      value: -2.87
       objectReference: {fileID: 0}
     - target: {fileID: 1029920197894851968, guid: 7b64f436d4d234446acee524d44365a8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.93
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 1029920197894851968, guid: 7b64f436d4d234446acee524d44365a8,
         type: 3}
@@ -677,11 +677,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4936294190819705279, guid: 7b64f436d4d234446acee524d44365a8,
         type: 3}
       insertIndex: 3
-      addedObject: {fileID: 567274807}
+      addedObject: {fileID: 567274810}
     - targetCorrespondingSourceObject: {fileID: 4936294190819705279, guid: 7b64f436d4d234446acee524d44365a8,
         type: 3}
       insertIndex: 4
-      addedObject: {fileID: 567274806}
+      addedObject: {fileID: 567274808}
+    - targetCorrespondingSourceObject: {fileID: 4936294190819705279, guid: 7b64f436d4d234446acee524d44365a8,
+        type: 3}
+      insertIndex: 5
+      addedObject: {fileID: 567274809}
     - targetCorrespondingSourceObject: {fileID: 4936294190819705279, guid: 7b64f436d4d234446acee524d44365a8,
         type: 3}
       insertIndex: -1
@@ -720,7 +724,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &567274806
+--- !u!114 &567274808
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -735,8 +739,20 @@ MonoBehaviour:
   minFallDistance: 5
   maxFallDistance: 20
   maxDamage: 100
-  hpBar: {fileID: 1759101121}
---- !u!114 &567274807
+  HpBar: {fileID: 1759101121}
+--- !u!114 &567274809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567274786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79024fe777330964c9deb6d0448941cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &567274810
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -751,7 +767,7 @@ MonoBehaviour:
   onDieCallback:
     m_PersistentCalls:
       m_Calls: []
-  life: 100
+  maxHp: 100
   HpBar: {fileID: 1759101121}
 --- !u!1 &575709128
 GameObject:
@@ -1163,7 +1179,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1352,6 +1368,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1217396377
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1217396379}
+  - component: {fileID: 1217396378}
+  m_Layer: 0
+  m_Name: GameObject (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1217396378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217396377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 340679b045dca494c947081060e6c16b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1217396379
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217396377}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.499586, y: 3.4277449, z: -7.3351903}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1241039403
 GameObject:
   m_ObjectHideFlags: 0
@@ -2834,9 +2894,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 10
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3117,3 +3177,4 @@ SceneRoots:
   - {fileID: 567274785}
   - {fileID: 1911110303}
   - {fileID: 1314994603}
+  - {fileID: 1217396379}
