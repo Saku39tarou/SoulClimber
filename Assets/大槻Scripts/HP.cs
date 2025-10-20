@@ -64,9 +64,6 @@ public class HP : MonoBehaviour
 			HpBar.value -=1;
 			Destroy(collision.gameObject);
 		}
-		
-		
-	
 	
 	}
 
@@ -78,10 +75,9 @@ public class HP : MonoBehaviour
 	{
 		onDieCallback.Invoke();
 	}
-	
+
 	private bool IsGrounded()
 	{
 		return false;
 	}
-	
 }

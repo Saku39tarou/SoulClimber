@@ -11,11 +11,15 @@ GameObject:
   - component: {fileID: 1029920197894851968}
   - component: {fileID: 6567022643557145966}
   - component: {fileID: 3107884579624607142}
+  - component: {fileID: 2307133820378776833}
+  - component: {fileID: 330594572025759798}
+  - component: {fileID: 8857253868190041254}
   - component: {fileID: 6781821963888032100}
   - component: {fileID: 6888738387853134888}
   - component: {fileID: 9133667424643460932}
   - component: {fileID: 8420945902114296593}
   - component: {fileID: 7244382498288447653}
+  - component: {fileID: 1322391893744888622}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Untagged
@@ -89,6 +93,51 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2307133820378776833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4936294190819705279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0364b9b84486c2d489ae757eca20cd38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDieCallback:
+    m_PersistentCalls:
+      m_Calls: []
+  maxHp: 100
+  HpBar: {fileID: 0}
+--- !u!114 &330594572025759798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4936294190819705279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89b827e67a03e3d4f93af784f9ab21b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minFallDistance: 5
+  maxFallDistance: 20
+  maxDamage: 100
+  HpBar: {fileID: 0}
+--- !u!114 &8857253868190041254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4936294190819705279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79024fe777330964c9deb6d0448941cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &6781821963888032100
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -261,17 +310,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb45cd3e447004249a1f1612bf846a38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 6
+  dashSpeed: 6
+  dashAcceleration: 10
   jumpSpeed: 7
   gravity: 15
   fallSpeed: 10
   initFallSpeed: 2
-  targetCamera: {fileID: 0}
+  targetCamera: {fileID: 5266582858246125951}
   climbSpeed: 2
-  climbCheckDistance: 0.6
-  climbableLayer:
-    serializedVersion: 2
-    m_Bits: 128
+  wallCheckDistance: 0.6
 --- !u!114 &7244382498288447653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,6 +339,33 @@ MonoBehaviour:
   gamepadSensitivity: 3
   minX: -90
   maxX: 90
+--- !u!54 &1322391893744888622
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4936294190819705279}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7991386021470963881
 GameObject:
   m_ObjectHideFlags: 0
