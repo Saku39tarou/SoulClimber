@@ -7,7 +7,7 @@ public class GameDirector0 : MonoBehaviour
 {
 	public GameObject TimerText;//timerTextXV
 	float time = 300.0f;//§ŒÀŠÔ
-					   // Start is called before the first frame update
+	
 	void Start()
 	{
 		Time.timeScale = 1f;
