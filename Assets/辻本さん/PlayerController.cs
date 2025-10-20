@@ -1,3 +1,4 @@
+/*
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,8 +12,7 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] GameObject cam;
 
 	[SerializeField] float climbSpeed = 3.0f;
-	[SerializeField] float wallCheckDistance = 0.6f;
-
+	[SerializeField] float wallCheckDistance = 0.6f; 
 	public enum State
 	{
 		Walk,
@@ -178,7 +178,6 @@ public class PlayerController : MonoBehaviour
 		{
 			isGround = true;
 		}
-	}*/
 
 	private void OnCollisionExit(Collision collision)
 	{
@@ -277,3 +276,196 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 }
+*/
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+[RequireComponent(typeof(CharacterController))]
+public class PlayerController : MonoBehaviour
+{
+	public enum State
+	{
+		Normal,
+		Ghost
+	}
+
+	[Header("基本移動設定")]
+	[SerializeField] private float speed = 3f;
+	[SerializeField] private float dashSpeed = 6f;
+	[SerializeField] private float dashAcceleration = 10f;
+
+	[Header("ジャンプ設定")]
+	[SerializeField] private float jumpSpeed = 7f;
+
+	[Header("重力設定")]
+	[SerializeField] private float gravity = 15f;
+	[SerializeField] private float fallSpeed = 10f;
+	[SerializeField] private float initFallSpeed = 2f;
+
+	[Header("カメラ設定")]
+	[SerializeField] private Camera targetCamera;
+
+	[Header("壁登り設定")]
+	[SerializeField] private float climbSpeed = 3f;
+	[SerializeField] private float wallCheckDistance = 0.6f;
+
+	[Header("ゴースト設定")]
+	[SerializeField] private float ghostSpeed = 5f;
+	[SerializeField] private float ghostVerticalSpeed = 3f;
+
+	private Transform _transform;
+	private CharacterController characterController;
+	private Vector2 inputMove;
+	private float verticalVelocity;
+	private float turnVelocity;
+	private bool isGroundedPrev;
+	private bool isClimbing = false;
+
+	private bool isDashing = false;
+	private float currentSpeed;
+
+	private State currentState = State.Normal;
+
+	// 入力
+	public void OnMove(InputAction.CallbackContext context)
+	{
+		inputMove = context.ReadValue<Vector2>();
+	}
+
+	public void OnJump(InputAction.CallbackContext context)
+	{
+		if (currentState == State.Ghost) return; // ゴースト中はジャンプ禁止
+		if (!context.performed || !characterController.isGrounded) return;
+		verticalVelocity = jumpSpeed;
+	}
+
+	private void Awake()
+	{
+		_transform = transform;
+		characterController = GetComponent<CharacterController>();
+		if (targetCamera == null)
+			targetCamera = Camera.main;
+
+		currentSpeed = speed;
+	}
+
+	private void Update()
+	{
+		if (!gameObject.activeInHierarchy || !characterController.enabled)
+			return;
+
+		switch (currentState)
+		{
+			case State.Normal:
+				UpdateNormal();
+				break;
+
+			case State.Ghost:
+				UpdateGhost();
+				break;
+		}
+	}
+
+	// 通常モード
+	private void UpdateNormal()
+	{
+		bool isGrounded = characterController.isGrounded;
+
+		// 壁判定
+		bool isTouchingWall = Physics.Raycast(_transform.position, _transform.forward, wallCheckDistance);
+
+		// 壁登り
+		if (isTouchingWall && Input.GetMouseButton(0))
+		{
+			isClimbing = true;
+			verticalVelocity = climbSpeed;
+		}
+		else
+		{
+			isClimbing = false;
+		}
+
+		// ダッシュ
+		if (Keyboard.current != null && Keyboard.current.leftShiftKey.isPressed && !isClimbing && isGrounded)
+			isDashing = true;
+		else
+			isDashing = false;
+
+		float targetSpeed = isDashing ? dashSpeed : speed;
+		currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * dashAcceleration);
+
+		// 重力
+		if (!isClimbing)
+		{
+			if (isGrounded && !isGroundedPrev)
+				verticalVelocity = -initFallSpeed;
+			else if (!isGrounded)
+			{
+				verticalVelocity -= gravity * Time.deltaTime;
+				if (verticalVelocity < -fallSpeed)
+					verticalVelocity = -fallSpeed;
+			}
+		}
+		isGroundedPrev = isGrounded;
+
+		// 移動
+		float cameraAngleY = targetCamera.transform.eulerAngles.y;
+		Vector3 moveVelocity = new Vector3(inputMove.x * currentSpeed, verticalVelocity, inputMove.y * currentSpeed);
+		moveVelocity = Quaternion.Euler(0, cameraAngleY, 0) * moveVelocity;
+		characterController.Move(moveVelocity * Time.deltaTime);
+
+		// 向き
+		if (inputMove != Vector2.zero)
+		{
+			float targetAngleY = -Mathf.Atan2(inputMove.y, inputMove.x) * Mathf.Rad2Deg + 90;
+			targetAngleY += cameraAngleY;
+			float angleY = Mathf.SmoothDampAngle(_transform.eulerAngles.y, targetAngleY, ref turnVelocity, 0.1f);
+			_transform.rotation = Quaternion.Euler(0, angleY, 0);
+		}
+	}
+
+	// ゴーストモード
+	private void UpdateGhost()
+	{
+		Vector3 move = new Vector3(inputMove.x, 0, inputMove.y);
+
+		// カメラ基準で移動方向を変換
+		float cameraY = targetCamera.transform.eulerAngles.y;
+		move = Quaternion.Euler(0, cameraY, 0) * move;
+		move.Normalize();
+
+		// 上下移動
+		float upDown = 0f;
+		if (Keyboard.current.spaceKey.isPressed)
+			upDown += 1f;
+		if (Keyboard.current.leftCtrlKey.isPressed)
+			upDown -= 1f;
+
+		move.y = upDown * ghostVerticalSpeed;
+
+		// 実際の移動
+		characterController.Move(move * ghostSpeed * Time.deltaTime);
+	}
+
+	// 状態切り替え
+	public void SetState(State newState)
+	{
+		currentState = newState;
+		Debug.Log($"State changed to: {currentState}");
+	}
+
+	public State GetState()
+	{
+		return currentState;
+	}
+
+	private void OnDrawGizmosSelected()
+	{
+		if (_transform != null)
+		{
+			Gizmos.color = Color.red;
+			Gizmos.DrawRay(_transform.position, _transform.forward * wallCheckDistance);
+		}
+	}
+}
+
