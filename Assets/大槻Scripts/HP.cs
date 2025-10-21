@@ -33,6 +33,9 @@ public class HP : MonoBehaviour
 			HpBar.value = maxHp;
 		}
     }
+
+
+
 	
 	public void Damage(float damage)
 	{
@@ -56,12 +59,12 @@ public class HP : MonoBehaviour
 		//if(collision.gameObject.tag=="recover")
 		if(collision.CompareTag("recover"))
 		{
-			HpBar.value +=1;
+			HpBar.value +=0.1f;
 			Destroy(collision.gameObject);
 		}
 		if(collision.CompareTag("NOrecover"))
 		{
-			HpBar.value -=1;
+			HpBar.value -=0.1f;
 			Destroy(collision.gameObject);
 		}
 	

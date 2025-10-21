@@ -8,10 +8,10 @@ public class FallDamage : MonoBehaviour
 {
 	public float minFallDistance = 5f;         // この距離以下ならノーダメージ
 	public float maxFallDistance = 20f;        // この距離で最大ダメージ
-	public float maxDamage = 100f;             // 最大ダメージ
-	public Slider HpBar;                       
+	public float maxDamage= 100f;             // 最大ダメージ
+	public Slider HpBar;
 
-	private float maxHP = 100f;
+	private float maxHP=100f;
 	private float currentHP;
 
 	private float fallStartY;
