@@ -38,4 +38,14 @@ public class EnemyMove : MonoBehaviour
 			nextGoal();
 		}
     }
+
+	private void OnTriggerStay(Collider other)
+	{
+		if(other.CompareTag("Palyer"))
+		{
+			agent.speed = 0;
+			transform.LookAt(Vector3.Lerp(transform.forward + transform.position, other.transform.position, 0.05f), Vector3.down);
+		}
+	}
+
 }
