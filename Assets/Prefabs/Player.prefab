@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2455833513642144424}
   - component: {fileID: 7296488459047216590}
+  - component: {fileID: -8670984951328530468}
   - component: {fileID: 312591830475113220}
   - component: {fileID: 5896215422692810447}
   - component: {fileID: 4496421481284428264}
@@ -62,6 +63,22 @@ MonoBehaviour:
   wallCheckDistance: 0.6
   ghostSpeed: 5
   ghostVerticalSpeed: 3
+--- !u!114 &-8670984951328530468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106563833247783263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89b827e67a03e3d4f93af784f9ab21b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minFallDistance: 5
+  maxFallDistance: 20
+  maxDamage: 100
+  HpBar: {fileID: 0}
 --- !u!114 &312591830475113220
 MonoBehaviour:
   m_ObjectHideFlags: 0
