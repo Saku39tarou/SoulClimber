@@ -10,7 +10,7 @@ public class FallDamage : MonoBehaviour
 	public float maxFallDistance = 20f;        // この距離で最大ダメージ
 	public float maxDamage = 100f;             // 最大ダメージ
 	public Slider HpBar;                       
-
+	
 	private float maxHP = 100f;
 	private float currentHP;
 
@@ -28,7 +28,7 @@ public class FallDamage : MonoBehaviour
 
 	void Update()
 	{
-		// 地面から離れた瞬間のY座標を記録
+		// 地面から離れた瞬間Y座標を記録する
 		if (!isFalling && !IsGrounded())
 		{
 			isFalling = true;
@@ -76,7 +76,7 @@ public class FallDamage : MonoBehaviour
 
 	bool IsGrounded()
 	{
-		// 地面との接地判定（簡易）
+		// 地面との接地判定
 		return Physics.Raycast(transform.position, Vector3.down, 1.1f);
 	}
 }

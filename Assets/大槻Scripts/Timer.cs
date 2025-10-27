@@ -10,7 +10,6 @@ public class Timer : MonoBehaviour
 	private float counttime = 0.0f;//ŽžŠÔŒv‘ª
 	public float timeLimit = 300.0f;//5•ª
 
-
 	// Update is called once per frame
 	void Update()
 	{

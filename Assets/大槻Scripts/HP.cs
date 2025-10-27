@@ -22,7 +22,8 @@ public class HP : MonoBehaviour
 
 	
 	[SerializeField] UnityEvent onDieCallback = new UnityEvent();
-	[SerializeField] float maxHp=100f;	
+	[SerializeField] float maxHp=1f;	
+	//[SerializeField] float maxHp=100f;	
 	[SerializeField] Slider HpBar;
 
     void Start()
@@ -50,18 +51,18 @@ public class HP : MonoBehaviour
 		}
 	}
 	
-	
+	//Unityë§ÇÃHPBarÇÃê›íËÇµÇƒÇ¢ÇÈValueÇÃílÇ≈ê›íËÇ∑ÇÈïKóv
 	private void OnTriggerEnter(Collider collision)
 	{
 		//if(collision.gameObject.tag=="recover")
 		if(collision.CompareTag("recover"))
 		{
-			HpBar.value +=1;
+			HpBar.value +=0.1f;
 			Destroy(collision.gameObject);
 		}
 		if(collision.CompareTag("NOrecover"))
 		{
-			HpBar.value -=1;
+			HpBar.value -=0.1f;
 			Destroy(collision.gameObject);
 		}
 	

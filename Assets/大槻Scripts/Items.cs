@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 //[Serializable]
 //[CreateAssetMenu(fileName ="Item",menuName ="CreateItem")]
@@ -40,12 +41,12 @@ public class Items : ScriptableObject//MonoBehaviour
 	{
 		return icon;
 	}
-
+	
 	public string GetItemName()
 	{
 		return ItemName;
 	}
-
+	
 	public string GetInformation()
 	{
 		return information;
