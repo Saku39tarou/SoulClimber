@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DayNightChecker : MonoBehaviour
 {
+	/*
 	private TimeOfDay timeOfDay;
 	private bool isDay;
 
@@ -11,4 +12,5 @@ public class DayNightChecker : MonoBehaviour
 	{
 		timeOfDay = FindAnyObjectByType<TimeOfDay>();
 	}
+	*/
 }
