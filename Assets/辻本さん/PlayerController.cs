@@ -326,10 +326,16 @@ public class PlayerController : MonoBehaviour
 
 	private State currentState = State.Normal;
 
+	// アニメーション
+	private Animator animator;
+
 	// 入力
 	public void OnMove(InputAction.CallbackContext context)
 	{
+
 		inputMove = context.ReadValue<Vector2>();
+		// アニメーション
+		animator.SetBool("Walk", true);
 	}
 
 	public void OnJump(InputAction.CallbackContext context)
@@ -343,6 +349,7 @@ public class PlayerController : MonoBehaviour
 	{
 		_transform = transform;
 		characterController = GetComponent<CharacterController>();
+		animator = GetComponent<Animator>();
 		if (targetCamera == null)
 			targetCamera = Camera.main;
 
@@ -387,9 +394,14 @@ public class PlayerController : MonoBehaviour
 
 		// ダッシュ
 		if (Keyboard.current != null && Keyboard.current.leftShiftKey.isPressed && !isClimbing && isGrounded)
+		{
 			isDashing = true;
+			animator.SetBool("Run", true);
+		}
 		else
+		{
 			isDashing = false;
+		}
 
 		float targetSpeed = isDashing ? dashSpeed : speed;
 		currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * dashAcceleration);
