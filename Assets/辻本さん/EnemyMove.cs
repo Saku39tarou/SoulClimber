@@ -6,9 +6,21 @@ using UnityEngine.AI;
 public class EnemyMove : MonoBehaviour
 {
 	[SerializeField] Transform[] goals;
+	[SerializeField] GameObject shotItem;
+	[SerializeField] float shotSpeed;
+	[SerializeField] GameObject enemyBody;
+
+	private float wateTime = 2.0f;
+	[SerializeField] float countTime;
 	private int destNum = 0;
 	private NavMeshAgent agent;
 
+	enum Mode
+	{
+		Search,
+		Attack,
+	}
+	[SerializeField] Mode mode;
 	// Start is called before the first frame update
 	void Start()
     {
@@ -29,23 +41,61 @@ public class EnemyMove : MonoBehaviour
 		//Debug.Log(destNum);
 	}
 
+	void Shot()
+	{
+		GameObject shotObj = Instantiate(shotItem, enemyBody.transform.position, Quaternion.identity);
+		Rigidbody bulletRigidbody = shotObj.GetComponent<Rigidbody>();
+		bulletRigidbody.AddForce(enemyBody.transform.forward * shotSpeed);
+	}
+
     // Update is called once per frame
     void Update()
     {
-		Debug.Log(agent.remainingDistance);
-		if (agent.remainingDistance == 0)
+		if(mode == Mode.Search)
 		{
-			nextGoal();
+			Debug.Log(agent.remainingDistance);
+			if (agent.remainingDistance == 0)
+			{
+				nextGoal();
+			}
 		}
+
+		if(mode == Mode.Attack)
+		{
+			countTime -= Time.deltaTime;
+			if (countTime <= 0)
+			{
+				Shot();
+				countTime = wateTime;
+			}
+			
+		}
+		
     }
 
 	private void OnTriggerStay(Collider other)
 	{
-		if(other.CompareTag("Palyer"))
+		if(other.CompareTag("Player"))
 		{
 			agent.speed = 0;
-			transform.LookAt(Vector3.Lerp(transform.forward + transform.position, other.transform.position, 0.05f), Vector3.down);
+			enemyBody.transform.LookAt(other.transform);
+			
+			
+			mode = Mode.Attack;
 		}
 	}
 
+	private void OnTriggerExit(Collider other)
+	{
+		if(other.CompareTag("Player"))
+		{
+			agent.speed = 3.5f;
+			enemyBody.gameObject.transform.rotation = Quaternion.identity;
+			mode = Mode.Search;
+		}
+	}
+
+
+
 }
+
