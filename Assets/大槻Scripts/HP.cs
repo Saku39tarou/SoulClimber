@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+using System.Threading;
 using TMPro;
+using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class HP : MonoBehaviour
 {/*
@@ -50,6 +53,7 @@ public class HP : MonoBehaviour
 			OnDie();
 		}
 	}
+
 	
 	//Unity側のHPBarの設定しているValueの値で設定する必要
 	private void OnTriggerEnter(Collider collision)
@@ -65,9 +69,25 @@ public class HP : MonoBehaviour
 			HpBar.value -=0.1f;
 			Destroy(collision.gameObject);
 		}
-	
+		
 	}
 
+	//毒ダメージ
+	private int count;
+	private void OnTriggerStay(Collider other)
+	{
+		if (other.CompareTag("PoisonGas"))
+		{
+			count += 1;
+	
+			if (count % 100 == 0)
+			{
+				HpBar.value -= 0.1f;
+			}
+		}
+	}
+
+		
 	public void TakeDamage(float damage)
 	{
 		HpBar.value -= damage;
@@ -80,5 +100,10 @@ public class HP : MonoBehaviour
 	private bool IsGrounded()
 	{
 		return false;
+	}
+
+	void GoToGameover()
+	{
+		SceneManager.LoadScene("GameOver");
 	}
 }
