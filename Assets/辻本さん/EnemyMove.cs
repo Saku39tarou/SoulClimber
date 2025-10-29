@@ -31,7 +31,7 @@ public class EnemyMove : MonoBehaviour
 	void nextGoal()
 	{
 		destNum += 1;
-		if(destNum == 4)
+		if(destNum == 5)
 		{
 			destNum = 0;
 		}
@@ -53,7 +53,6 @@ public class EnemyMove : MonoBehaviour
     {
 		if(mode == Mode.Search)
 		{
-			Debug.Log(agent.remainingDistance);
 			if (agent.remainingDistance == 0)
 			{
 				nextGoal();

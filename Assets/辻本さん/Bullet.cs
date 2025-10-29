@@ -21,6 +21,7 @@ public class Bullet : MonoBehaviour
 	{
 		if (other.CompareTag("Player"))
 		{
+			Debug.Log("player‚É“–‚½‚Á‚½");
 			Destroy(this.gameObject);
 		}
 		if(other.CompareTag("Stage"))
