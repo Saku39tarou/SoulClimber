@@ -328,7 +328,7 @@ public class PlayerController : MonoBehaviour
 	private State currentState = State.Normal;
 
 	// アニメーション
-	private Animator animator;
+	//private Animator animator;
 
 	// 入力
 	public void OnMove(InputAction.CallbackContext context)
@@ -336,7 +336,7 @@ public class PlayerController : MonoBehaviour
 
 		inputMove = context.ReadValue<Vector2>();
 		// アニメーション
-		animator.SetBool("Run", inputMove != Vector2.zero);
+		//animator.SetBool("Run", inputMove != Vector2.zero);
 	}
 
 	public void OnJump(InputAction.CallbackContext context)
@@ -350,7 +350,7 @@ public class PlayerController : MonoBehaviour
 	{
 		_transform = transform;
 		characterController = GetComponent<CharacterController>();
-		animator = GetComponent<Animator>();
+		//animator = GetComponent<Animator>();
 		if (targetCamera == null)
 			targetCamera = Camera.main;
 
