@@ -277,6 +277,7 @@ public class PlayerController : MonoBehaviour
 	}
 }
 */
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -335,7 +336,7 @@ public class PlayerController : MonoBehaviour
 
 		inputMove = context.ReadValue<Vector2>();
 		// アニメーション
-		animator.SetBool("Walk", true);
+		animator.SetBool("Run", inputMove != Vector2.zero);
 	}
 
 	public void OnJump(InputAction.CallbackContext context)
@@ -396,7 +397,6 @@ public class PlayerController : MonoBehaviour
 		if (Keyboard.current != null && Keyboard.current.leftShiftKey.isPressed && !isClimbing && isGrounded)
 		{
 			isDashing = true;
-			animator.SetBool("Run", true);
 		}
 		else
 		{
