@@ -9,20 +9,7 @@ using UnityEngine.UI;
 
 
 public class HP : MonoBehaviour
-{/*
-	public int healAmount = 20;
-
-	private void OnTriggerEnter(Collider other)
-	{
-		PlayerHealth health = other.GetComponent<PlayerHealth>();
-		if (health != null)
-		{
-			health.Heal(healAmount);
-			Destroy(gameObject); // ‰ñ•œƒAƒCƒeƒ€‚ğÁ‚·
-		}
-	}*/
-
-
+{
 	
 	[SerializeField] UnityEvent onDieCallback = new UnityEvent();
 	[SerializeField] float maxHp=1f;	
@@ -78,11 +65,11 @@ public class HP : MonoBehaviour
 	{
 		if (other.CompareTag("PoisonGas"))
 		{
-			count += 1;
+			count += 1;//•b‚²‚Æ‚É
 	
 			if (count % 100 == 0)
 			{
-				HpBar.value -= 0.1f;
+				HpBar.value -= 0.1f;//Slider‚ğŒ¸‚ç‚·
 			}
 		}
 	}
