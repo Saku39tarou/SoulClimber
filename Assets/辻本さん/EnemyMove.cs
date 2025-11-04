@@ -31,7 +31,7 @@ public class EnemyMove : MonoBehaviour
 	void nextGoal()
 	{
 		destNum += 1;
-		if(destNum == 5)
+		if(destNum == goals.Length)
 		{
 			destNum = 0;
 		}
