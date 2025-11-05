@@ -13,6 +13,7 @@ public class Items : ScriptableObject//MonoBehaviour
 	public enum KindOfItem
 	{
 		Weapon,
+		Recovery,
 		UseItem
 	}
 

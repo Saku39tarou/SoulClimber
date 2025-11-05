@@ -66,7 +66,7 @@ public class HP : MonoBehaviour
 		if (other.CompareTag("PoisonGas"))
 		{
 			count += 1;//•b‚²‚Æ‚É
-	
+			
 			if (count % 100 == 0)
 			{
 				HpBar.value -= 0.1f;//Slider‚ðŒ¸‚ç‚·
