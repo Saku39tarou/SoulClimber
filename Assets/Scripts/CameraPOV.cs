@@ -27,7 +27,7 @@ public class CameraPOV : MonoBehaviour
 	void LateUpdate()
 	{
 		HandleLook();
-		UpdateCursorLock();	//カーソルの表示非表示
+		//UpdateCursorLock();	//カーソルの表示非表示
 	}
 
 	void HandleLook()
@@ -55,13 +55,13 @@ public class CameraPOV : MonoBehaviour
 		transform.localRotation = characterRot;
 	}
 	//ゲーム画面をクリックするとカーソルを非表示にする
-	public void UpdateCursorLock()
+	/*public void UpdateCursorLock()
     {
 		if (Input.GetKeyDown(KeyCode.Escape)) cursorLock = false;
 		else if (Input.GetMouseButton(0)) cursorLock = true;
 
 		Cursor.lockState = cursorLock ? CursorLockMode.Locked : CursorLockMode.None;
-	}
+	}*/
 
 	//角度制限関数の作成
 	public Quaternion ClampRotation(Quaternion q)

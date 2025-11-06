@@ -7,18 +7,19 @@ public class ItemFind : MonoBehaviour
 	//public string itemName = "Potion";
 	public string itemName = "Recovery";
 
-	private void OnTriggerEnter(Collider other)
+	private void OnTriggerEnter(Collider collision)
 	{
-		if (other.CompareTag("Player"))
+		if (collision.gameObject.tag=="Player")
 		{
 			// プレイヤーが近づいた時
 			Debug.Log($"{itemName}を拾う");
+
 		}
 	}
-
-	private void OnTriggerStay(Collider other)
+	
+	private void OnTriggerStay(Collider collision)
 	{
-		if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.E))//タグがPlayerでEキーを押すと拾うことができる
+		if (collision.gameObject.tag=="Player" && Input.GetKeyDown(KeyCode.Q))//タグがPlayerでQキーを押すと拾うことができる
 		{
 			InventoryManager.Instance.AddItem(itemName);
 			Destroy(gameObject); // 拾って消す

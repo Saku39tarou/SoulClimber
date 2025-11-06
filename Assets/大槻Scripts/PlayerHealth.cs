@@ -2,44 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
+
 
 public class PlayerHealth : MonoBehaviour
-{/*
-	public int maxHealth = 100;
-	public int currentHealth;
+{
+	public Slider hpBar;
+	public float maxHP = 100;
+	public float currentHP;
 
-	public UnityEvent<int, int> OnHealthChanged; // (current, max)
-
-	private void Start()
+	void Start()
 	{
-		currentHealth = maxHealth;
-		OnHealthChanged.Invoke(currentHealth, maxHealth);
+		currentHP = maxHP;
+		UpdateHPBar();
 	}
 
-	public void TakeDamage(int amount)
+	public void Heal(float amount)
 	{
-		currentHealth -= amount;
-		currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-		OnHealthChanged.Invoke(currentHealth, maxHealth);
-
-		if (currentHealth <= 0)
-		{
-			Die();
-		}
+		currentHP += amount;
+		if (currentHP > maxHP)
+			currentHP = maxHP;
+		UpdateHPBar();
 	}
 
-	public void Heal(int amount)
+	void UpdateHPBar()
 	{
-		currentHealth += amount;
-		currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-		OnHealthChanged.Invoke(currentHealth, maxHealth);
+		hpBar.value = (float)currentHP / maxHP;
 	}
-
-	private void Die()
-	{
-		Debug.Log("ÉvÉåÉCÉÑÅ[éÄñS");
-		// éÄñSèàóù
-	}*/
 }
+
+
+
+
 
 
