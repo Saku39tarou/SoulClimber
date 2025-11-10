@@ -14,7 +14,7 @@ public class InventoryManager : MonoBehaviour
 	}
 
 	private List<string> items = new List<string>();
-
+	
 	public void AddItem(string itemName)
 	{
 		items.Add(itemName);

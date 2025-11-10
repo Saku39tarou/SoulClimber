@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
 	public Slider hpBar;
-	public float maxHP = 100;
+	public float maxHP = 1;
 	public float currentHP;
 
 	void Start()
@@ -29,6 +29,7 @@ public class PlayerHealth : MonoBehaviour
 	{
 		hpBar.value = (float)currentHP / maxHP;
 	}
+	
 }
 
 
