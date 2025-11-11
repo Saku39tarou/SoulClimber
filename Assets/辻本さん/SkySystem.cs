@@ -11,11 +11,18 @@ public class SkySystem : MonoBehaviour
 	//角度を入れる変数
 	[SerializeField]
 	private float sunPos;
-
+	[SerializeField]
+	private float alpha;
 	[SerializeField]
 	TextMeshProUGUI skySituation;
+	[SerializeField]
+	GameObject fadeSwich;
 
-	Coroutine fadeIn;
+
+	[SerializeField] bool fadeIn;
+	[SerializeField] bool fadeOut;
+
+	private float nextWaitTime;
 	public int dayCount = 1;
 
 	enum Sky
@@ -25,9 +32,13 @@ public class SkySystem : MonoBehaviour
 	}
 	[SerializeField] Sky sky;
 
+
 	void Start()
 	{
-		SkyNames = new string[] {"朝","もうすぐ日が沈む....","夜","もうすぐ夜が明ける..."};
+		fadeIn = true;
+		fadeOut = false;
+		skySituation.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+		SkyNames = new string[] { "朝", "もうすぐ日が沈む....", "夜", "もうすぐ夜が明ける..." };
 		skySituation.text = "";
 	}
 
@@ -37,66 +48,77 @@ public class SkySystem : MonoBehaviour
 		transform.eulerAngles = new Vector3(sunPos, 0, 0);
 
 		//1日のスピードを調節する
-		sunPos += Time.deltaTime * 2;
+		sunPos += Time.deltaTime;
 
-		if (sunPos >= 150)
+		if (sunPos >= 160 && sunPos <= 170)
 		{
 			skySituation.text = SkyNames[1];
-			
-			StartCoroutine("FadeIn");
+			if (fadeIn) FadeIn();
+			if (fadeOut) FadeOut();
 		}
-
-
-		if (sunPos >= 180)
+		if (sunPos >= 180 && sunPos <= 190)
 		{
+
 			skySituation.text = SkyNames[2];
-			
-			StartCoroutine("FadeIn");
+			if (fadeIn) FadeIn();
+			if (fadeOut) FadeOut();
 			sky = Sky.Night;
 		}
-
-		if (sunPos >= 330)
+		if (sunPos >= 330 && sunPos <= 340)
 		{
-			skySituation.text = SkyNames[3];
-			
-			StartCoroutine("FadeIn");
-			
-		}
 
+			skySituation.text = SkyNames[3];
+			if (fadeIn) FadeIn();
+			if (fadeOut) FadeOut();
+		}
 		if (sunPos >= 360)
 		{
+
 			skySituation.text = SkyNames[0];
-			
-			StartCoroutine("FadeIn");
+			if (fadeIn) FadeIn();
+			if (fadeOut) FadeOut();
 			sunPos = 0;
 			sky = Sky.Day;
 		}
+
 	}
 
-	
-	IEnumerator FadeIn()
+
+	private void FadeIn()
 	{
-		skySituation.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-		while (true)
+		//for (int i = 0; i < 255; i++)
+		//{
+		//	skySituation.color = skySituation.color + new Color32(0, 0, 0, 1);
+		//	new WaitForSeconds(0.5f);
+		//}
+		alpha += 0.001f;
+		skySituation.color = new Color(0, 0, 0, alpha);
+		if (alpha >= 1)
 		{
-			for (int i = 0; i < 255; i++)
+			nextWaitTime += Time.deltaTime;
+			if (nextWaitTime >= 3.0f)
 			{
-				skySituation.color = skySituation.color + new Color32(0, 0, 0, 1);
-				yield return new WaitForSeconds(0.1f);
+				nextWaitTime = 0;
+				fadeIn = false;
+				fadeOut = true;
 			}
+
 		}
-		
 	}
 
-	IEnumerator FadeOut()
+	void FadeOut()
 	{
-		while (true)
+		//for (int i = 255; i > 1; i--)
+		//{
+		//	skySituation.color = skySituation.color - new Color32(0, 0, 0, 1);
+		//	new WaitForSeconds(0.1f);
+		//}
+		alpha -= 0.001f;
+		skySituation.color = new Color(0, 0, 0, alpha);
+		if (alpha <= 0)
 		{
-			for (int i = 225; i > 1; i--)
-			{
-				skySituation.color = skySituation.color - new Color32(0, 0, 0, 1);
-				yield return new WaitForSeconds(0.5f);
-			}
+			fadeOut = false;
+
 		}
 	}
 }
