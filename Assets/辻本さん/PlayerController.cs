@@ -374,19 +374,57 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	// 通常モード
+	// 通常
 	private void UpdateNormal()
 	{
 		bool isGrounded = characterController.isGrounded;
 
+		bool isTouchingWall = false;
+
 		// 壁判定
-		bool isTouchingWall = Physics.Raycast(_transform.position, _transform.forward, wallCheckDistance);
+		RaycastHit hit;
+		float sphereRadius = 0.4f;
+
+		// Rayを中心位置に
+		Vector3 start = _transform.position + Vector3.up * (characterController.height * 0.3f);
+
+		if (Physics.SphereCast(start, sphereRadius, _transform.forward, out hit, wallCheckDistance))
+		{
+			float wallDot = Vector3.Dot(hit.normal, Vector3.up);
+			if (wallDot < 0.5f)
+			{
+				isTouchingWall = true;
+			}
+		}
+
 
 		// 壁登り
 		if (isTouchingWall && Input.GetMouseButton(0))
 		{
 			isClimbing = true;
-			verticalVelocity = climbSpeed;
+
+			// 壁の法線方向を基に登る方向を計算
+			Vector3 climbDir = Vector3.ProjectOnPlane(Vector3.up, -hit.normal).normalized;
+		
+			// 上昇・下降
+			float inputVeertical = inputMove.y;
+			Vector3 climbMove = climbDir * (inputVeertical * climbSpeed);
+
+			//壁に押し付ける力
+			climbMove += -hit.normal * 0.1f;
+
+			characterController.Move(climbMove * Time.deltaTime);
+
+			// キャラの向きを壁の方向に合わせる
+			Quaternion targetRot = Quaternion.LookRotation(-hit.normal);
+			_transform.rotation = Quaternion.Slerp(_transform.rotation, targetRot, Time.deltaTime * 10f);
+			
+			// 登りきり判定
+			if(!Physics.Raycast(start, _transform.forward, out _, wallCheckDistance))
+			{
+				isClimbing = false;
+			}
+			return;
 		}
 		else
 		{
@@ -436,7 +474,7 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	// ゴーストモード
+	// ゴースト
 	private void UpdateGhost()
 	{
 		Vector3 move = new Vector3(inputMove.x, 0, inputMove.y);
@@ -459,6 +497,25 @@ public class PlayerController : MonoBehaviour
 		characterController.Move(move * ghostSpeed * Time.deltaTime);
 	}
 
+	private bool CheckClimbOver(RaycastHit wallHit)
+	{
+		Vector3 headPos = _transform.position + Vector3.up * (characterController.height * 0.5f);
+		if(Physics.Raycast(headPos, Vector3.up, out RaycastHit upHit, 0.8f))
+		{
+			return false;
+		}
+
+		Vector3 forwardPos = _transform.position + (-wallHit.normal * 0.3f) + Vector3.up * 1.0f;
+		if(Physics.Raycast(forwardPos, Vector3.down, out RaycastHit groundHit, 1.5f))
+		{
+			if(Vector3.Dot(groundHit.normal, Vector3.up) > 0.8f)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	// 状態切り替え
 	public void SetState(State newState)
 	{
@@ -473,11 +530,26 @@ public class PlayerController : MonoBehaviour
 
 	private void OnDrawGizmosSelected()
 	{
-		if (_transform != null)
-		{
-			Gizmos.color = Color.red;
-			Gizmos.DrawRay(_transform.position, _transform.forward * wallCheckDistance);
-		}
+		if (_transform == null) _transform = transform;
+		if (characterController == null) characterController = GetComponent<CharacterController>();
+
+		float sphereRadius = 0.5f;
+		float distance = wallCheckDistance;
+
+		Vector3 start = _transform.position + Vector3.up * (characterController.height * 0.5f);
+		Vector3 end = start + _transform.forward * distance;
+
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawWireSphere(start, sphereRadius); // 始点
+		Gizmos.color = Color.cyan;
+		Gizmos.DrawWireSphere(end, sphereRadius);   // 終点
+		Gizmos.color = Color.white;
+		Gizmos.DrawLine(start, end);                // 線
+
+		// 登りきりチェック位置のデバック
+		Gizmos.color = Color.green;
+		Vector3 headPos = _transform.position + Vector3.up * (characterController.height * 0.5f);
+		Gizmos.DrawWireSphere(headPos, 0.1f);
 	}
 }
 

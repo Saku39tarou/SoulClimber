@@ -6,8 +6,8 @@ public class TestPlayerController : MonoBehaviour
 {
 	[Header("基本移動設定")]
 	[SerializeField] private float speed = 3f;
-	[SerializeField] private float dashSpeed = 6f; // ダッシュ時の速さ
-	[SerializeField] private float dashAcceleration = 10f; // ダッシュへの切り替えの滑らかさ
+	[SerializeField] private float dashSpeed = 6f;					// ダッシュ時の速さ
+	[SerializeField] private float dashAcceleration = 10f;			// ダッシュへの切り替えの滑らかさ
 
 	[Header("ジャンプ設定")]
 	[SerializeField] private float jumpSpeed = 7f;
@@ -35,7 +35,6 @@ public class TestPlayerController : MonoBehaviour
 	private bool isDashing = false;
 	private float currentSpeed;
 
-	// 入力 
 	public void OnMove(InputAction.CallbackContext context)
 	{
 		// 入力値を保持しておく

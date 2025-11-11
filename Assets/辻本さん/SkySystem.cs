@@ -84,7 +84,6 @@ public class SkySystem : MonoBehaviour
 				skySituation.color = skySituation.color + new Color32(0, 0, 0, 1);
 				yield return new WaitForSeconds(0.1f);
 			}
-			
 		}
 		
 	}
