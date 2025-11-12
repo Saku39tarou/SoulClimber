@@ -24,7 +24,7 @@ public class InventoryManager : MonoBehaviour
 	public bool HasItem(string itemName)
 	{
 		return items.Contains(itemName);
-
+		
 
 	}
 

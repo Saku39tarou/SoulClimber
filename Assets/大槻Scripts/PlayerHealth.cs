@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
 	public Slider hpBar;
-	public float maxHP = 1;
+	//public float maxHP = 1;
+	public float maxHP = 0.1f;
 	public float currentHP;
 
 	void Start()
