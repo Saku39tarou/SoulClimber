@@ -1,3 +1,60 @@
+/*
+using UnityEngine;
+
+public class CameraPOV : MonoBehaviour
+{
+	[Header("ターゲット設定")]
+	private Transform playerTarget;		// プレイヤー
+	private Transform ghostTarget;		// ゴースト
+	private Transform currentTarget;	// 現在追っているターゲット
+
+	[Header("回転設定")]
+	public float sensitivity = 150f;
+	public float minY = -80f;
+	public float maxY = 80f;
+
+	private float rotX;
+	private float rotY;
+
+	void Start()
+	{
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
+
+		// 最初はPlayerを追従
+		currentTarget = playerTarget;
+	}
+
+	void LateUpdate()
+	{
+		if (currentTarget == null) return;
+
+		// マウス入力で回転
+		float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+		float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+
+		rotY += mouseX;
+		rotX -= mouseY;
+		rotX = Mathf.Clamp(rotX, minY, maxY);
+
+		// カメラの回転を適用
+		transform.rotation = Quaternion.Euler(rotX, rotY, 0);
+
+		// ターゲットの位置に追従
+		transform.position = currentTarget.position;
+	}
+
+	// ターゲット切り替え関数
+	public void SetTarget(Transform newTarget)
+	{
+		currentTarget = newTarget;
+	}
+
+	public void SwitchToPlayer() => currentTarget = playerTarget;
+	public void SwitchToGhost() => currentTarget = ghostTarget;
+}
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -55,13 +112,13 @@ public class CameraPOV : MonoBehaviour
 		transform.localRotation = characterRot;
 	}
 	//ゲーム画面をクリックするとカーソルを非表示にする
-	/*public void UpdateCursorLock()
+	public void UpdateCursorLock()
     {
 		if (Input.GetKeyDown(KeyCode.Escape)) cursorLock = false;
 		else if (Input.GetMouseButton(0)) cursorLock = true;
 
 		Cursor.lockState = cursorLock ? CursorLockMode.Locked : CursorLockMode.None;
-	}*/
+	}
 
 	//角度制限関数の作成
 	public Quaternion ClampRotation(Quaternion q)
