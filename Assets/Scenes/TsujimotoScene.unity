@@ -312,10 +312,9 @@ MonoBehaviour:
   alpha: 0
   skySituation: {fileID: 956289151}
   fadeSwich: {fileID: 40603694}
-  fadeIn: 0
-  fadeOut: 0
   dayCount: 0
   sky: 0
+  fadeState: 0
 --- !u!1001 &330008788
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2688,7 +2687,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: aaaaa
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 341e76bb8e94c9e4bbc9ac7b4f48c5ba, type: 2}
   m_sharedMaterial: {fileID: 5135947632357071062, guid: 341e76bb8e94c9e4bbc9ac7b4f48c5ba,
