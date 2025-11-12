@@ -28,7 +28,7 @@ public class EnemyWalk : MonoBehaviour
 	{
 		destNum += 1;
 
-		if (destNum == 4)
+		if (destNum == 3 || destNum == 5)
 		{
 			destNum = 0;
 		}
@@ -51,7 +51,7 @@ public class EnemyWalk : MonoBehaviour
 			nextGoal();
 		}
 
-		if (destNum == 3)
+		if (destNum == 4)
 		{
 			EnemyAttack();
 		}
