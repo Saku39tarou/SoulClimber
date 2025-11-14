@@ -13,7 +13,7 @@ public class ItemFind : MonoBehaviour
 		{
 			// ƒvƒŒƒCƒ„[‚ª‹ß‚Ã‚¢‚½
 			Debug.Log($"{itemName}‚ğE‚¤");
-
+			
 		}
 	}
 	

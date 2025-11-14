@@ -37,7 +37,7 @@ public class Items : ScriptableObject//MonoBehaviour
 	{
 		return kindOfItem;
 	}
-
+	
 	public Sprite GetIcon()
 	{
 		return icon;

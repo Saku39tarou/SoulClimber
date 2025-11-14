@@ -62,7 +62,7 @@ public class Inventory : MonoBehaviour
 			hp.Heal(potionHealAmount);
 			hasPotion = false;
 			Debug.Log("アイテムを使用しました！");
-			Button.SetActive(false);
+			Button.SetActive(false);//アイコンをクリックすると使用しアイコンを削除
 		}
 		else
 		{
