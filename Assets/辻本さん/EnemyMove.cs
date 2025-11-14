@@ -43,7 +43,7 @@ public class EnemyMove : MonoBehaviour
 
 	void Shot()
 	{
-		GameObject shotObj = Instantiate(shotItem, enemyBody.transform.position, Quaternion.identity);
+		GameObject shotObj = Instantiate(shotItem, enemyBody.transform.position, enemyBody.transform.rotation);
 		Rigidbody bulletRigidbody = shotObj.GetComponent<Rigidbody>();
 		bulletRigidbody.AddForce(enemyBody.transform.forward * shotSpeed);
 	}
@@ -93,8 +93,5 @@ public class EnemyMove : MonoBehaviour
 			mode = Mode.Search;
 		}
 	}
-
-
-
 }
 

@@ -311,7 +311,6 @@ MonoBehaviour:
   sunPos: 0
   alpha: 0
   skySituation: {fileID: 956289151}
-  fadeSwich: {fileID: 40603694}
   dayCount: 0
   sky: 0
   fadeState: 0
@@ -2689,8 +2688,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 341e76bb8e94c9e4bbc9ac7b4f48c5ba, type: 2}
-  m_sharedMaterial: {fileID: 5135947632357071062, guid: 341e76bb8e94c9e4bbc9ac7b4f48c5ba,
+  m_fontAsset: {fileID: 11400000, guid: 2899a05d7d874184e9ee5c3058139ce3, type: 2}
+  m_sharedMaterial: {fileID: -8334645280865687502, guid: 2899a05d7d874184e9ee5c3058139ce3,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
