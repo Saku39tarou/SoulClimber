@@ -37,7 +37,7 @@ ModelImporter:
       takeName: Bird 1|Action.BirdAttack
       internalID: 8107400755174022779
       firstFrame: 0
-      lastFrame: 70
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

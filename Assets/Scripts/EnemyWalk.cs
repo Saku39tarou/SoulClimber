@@ -8,11 +8,18 @@ public class EnemyWalk : MonoBehaviour
 	[SerializeField] GameObject player; 
 	[SerializeField] Transform[] goals;
 
-	[SerializeField] int destNum = 0;
 	[SerializeField] float distance;
 	[SerializeField] float angle = 45f;
+	[SerializeField] float Speed = 3.5f;
+	[SerializeField] float enemySpeed = 10f;
+	[SerializeField] float attackTime;
 
-	bool attack;
+	private float maxTime = 3;
+	private int destNum = 0;
+	bool attackEnemy;
+
+	// アニメーション
+	private Animator animator;
 
 	private NavMeshAgent agent;
 	// Start is called before the first frame update
@@ -20,27 +27,40 @@ public class EnemyWalk : MonoBehaviour
     {
 		agent = GetComponent<NavMeshAgent>();
 		agent.destination = goals[destNum].position;
-		player = GameObject.Find("Player");
-		attack = false;
+		attackEnemy = false;
+		animator = GetComponent<Animator>();
+		attackTime = maxTime;
 	}
 
 	void nextGoal()
 	{
+		if (attackEnemy) return;
 		destNum += 1;
 
-		if (destNum == 3 || destNum == 5)
+		if (destNum == goals.Length)
 		{
 			destNum = 0;
 		}
 
 	agent.destination = goals[destNum].position;
-
-	Debug.Log(destNum);
 	}
 
 	void EnemyAttack()
 	{
-		attack = true;
+		attackTime -= Time.deltaTime;
+		agent.destination = player.transform.position;
+		agent.speed = enemySpeed;
+		animator.SetBool("Attack",true);
+
+		if (attackTime <= 0)
+		{
+			attackEnemy = false;
+			destNum = 0;
+			animator.SetBool("Attack", false);
+			attackTime = maxTime;
+			agent.speed = Speed;
+			Debug.Log(destNum);
+		}
 	}
 
 	// Update is called once per frame
@@ -51,13 +71,9 @@ public class EnemyWalk : MonoBehaviour
 			nextGoal();
 		}
 
-		if (destNum == 4)
+		if(attackEnemy)
 		{
 			EnemyAttack();
-		}
-
-		if(attack)
-		{
 			Debug.Log("OK");
 		}
 	}
@@ -74,21 +90,12 @@ public class EnemyWalk : MonoBehaviour
 			{
 				if (Physics.Raycast(this.transform.position, posDelta, out RaycastHit hit)) //Rayを使用してtargetに当たっているか判別
 				{
-					if (hit.collider == other)
-					{
-						destNum = 3;
-					}
+					attackEnemy = true;
+					this.gameObject.transform.LookAt(other.transform);
 				}
 			}
 		}
 	}
 
-	private void OnTriggerExit(Collider other)
-	{
-		if (other.gameObject.tag == "Player") //視界の範囲内の当たり判定
-		{
-			attack = false;
-			destNum = 0;
-		}
-	}
+	
 }
