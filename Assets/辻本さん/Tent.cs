@@ -9,7 +9,7 @@ public class Tent : MonoBehaviour
 	[SerializeField] private GameObject climbPlayer;
 	[SerializeField] private GameObject ghostPlayer;
 	[SerializeField] private Transform waitPos;
-	[SerializeField] private Transform target;
+	//[SerializeField] private Transform target;
 
 	private bool onPlayer = false;
 	private bool onGhost = false;
