@@ -55,7 +55,6 @@ public class EnemyWalk : MonoBehaviour
 		if (attackTime <= 0)
 		{
 			attackEnemy = false;
-			destNum = 0;
 			animator.SetBool("Attack", false);
 			attackTime = maxTime;
 			agent.speed = Speed;
