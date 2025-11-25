@@ -1,59 +1,3 @@
-/*
-using UnityEngine;
-
-public class CameraPOV : MonoBehaviour
-{
-	[Header("ターゲット設定")]
-	private Transform playerTarget;		// プレイヤー
-	private Transform ghostTarget;		// ゴースト
-	private Transform currentTarget;	// 現在追っているターゲット
-
-	[Header("回転設定")]
-	public float sensitivity = 150f;
-	public float minY = -80f;
-	public float maxY = 80f;
-
-	private float rotX;
-	private float rotY;
-
-	void Start()
-	{
-		Cursor.lockState = CursorLockMode.Locked;
-		Cursor.visible = false;
-
-		// 最初はPlayerを追従
-		currentTarget = playerTarget;
-	}
-
-	void LateUpdate()
-	{
-		if (currentTarget == null) return;
-
-		// マウス入力で回転
-		float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-		float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
-
-		rotY += mouseX;
-		rotX -= mouseY;
-		rotX = Mathf.Clamp(rotX, minY, maxY);
-
-		// カメラの回転を適用
-		transform.rotation = Quaternion.Euler(rotX, rotY, 0);
-
-		// ターゲットの位置に追従
-		transform.position = currentTarget.position;
-	}
-
-	// ターゲット切り替え関数
-	public void SetTarget(Transform newTarget)
-	{
-		currentTarget = newTarget;
-	}
-
-	public void SwitchToPlayer() => currentTarget = playerTarget;
-	public void SwitchToGhost() => currentTarget = ghostTarget;
-}
-*/
 
 using System.Collections;
 using System.Collections.Generic;
@@ -135,3 +79,77 @@ public class CameraPOV : MonoBehaviour
 		return q;
 	}
 }
+/*
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class CameraPOV : MonoBehaviour
+{
+	[SerializeField] private Transform playerTarget;
+	[SerializeField] private Transform ghostTarget;
+	[SerializeField] private float mouseSensitivity = 0.1f;
+	[SerializeField] private float gamepadSensitivity = 3.0f;
+	[SerializeField] private InputActionReference lookAction;
+	[SerializeField] private float minX = -90f;
+	[SerializeField] private float maxX = 90f;
+
+	private Quaternion cameraRot, characterRot;
+	private Transform currentTarget;
+
+	void Start()
+	{
+		currentTarget = playerTarget;
+		cameraRot = transform.localRotation;
+		characterRot = transform.localRotation;
+		lookAction.action.Enable();
+	}
+
+	void LateUpdate()
+	{
+		if (currentTarget != null)
+		{
+			// 位置追従
+			transform.position = currentTarget.position;
+		}
+		HandleLook();
+	}
+
+	void HandleLook()
+	{
+		Vector2 lookInput = lookAction.action.ReadValue<Vector2>();
+
+		float currentSensitivity = mouseSensitivity;
+
+		var activeControl = lookAction.action.activeControl;
+		if (activeControl != null && activeControl.device is Gamepad)
+			currentSensitivity = gamepadSensitivity;
+
+		float xRot = lookInput.x * currentSensitivity;
+		float yRot = lookInput.y * currentSensitivity;
+
+		cameraRot *= Quaternion.Euler(-yRot, 0, 0);
+		characterRot *= Quaternion.Euler(0, xRot, 0);
+
+		cameraRot = ClampRotation(cameraRot);
+
+		transform.localRotation = characterRot;
+		transform.GetChild(0).localRotation = cameraRot; 
+	}
+
+	public void SwitchToPlayer() => currentTarget = playerTarget;
+	public void SwitchToGhost() => currentTarget = ghostTarget;
+
+	Quaternion ClampRotation(Quaternion q)
+	{
+		q.x /= q.w;
+		q.y /= q.w;
+		q.z /= q.w;
+		q.w = 1f;
+
+		float angleX = Mathf.Atan(q.x) * Mathf.Rad2Deg * 2f;
+		angleX = Mathf.Clamp(angleX, minX, maxX);
+		q.x = Mathf.Tan(angleX * Mathf.Deg2Rad * 0.5f);
+		return q;
+	}
+}
+*/

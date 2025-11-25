@@ -598,11 +598,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9738050aed8b9440af83d4cda7dff67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 4742236261295855311}
-  lookAction: {fileID: 8554221713234110063, guid: 3ace25626bfde784da23c56926a26eda,
-    type: 3}
+  playerTarget: {fileID: 0}
+  ghostTarget: {fileID: 0}
   mouseSensitivity: 0.1
   gamepadSensitivity: 3
+  lookAction: {fileID: 8554221713234110063, guid: 3ace25626bfde784da23c56926a26eda,
+    type: 3}
   minX: -90
   maxX: 90
 --- !u!143 &507153296894487619
