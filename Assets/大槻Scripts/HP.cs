@@ -11,20 +11,13 @@ using UnityEngine.UI;
 public class HP : MonoBehaviour
 {
 	
-	[SerializeField] UnityEvent onDieCallback = new UnityEvent();
+	[SerializeField] UnityEvent onDieCallback = new UnityEvent();	
 	[SerializeField] float maxHp=1f;	
 	//[SerializeField] float maxHp=100f;	
 	[SerializeField] Slider HpBar;
 
-    void Start()
-    {
-	
-        if(HpBar != null)
-		{
-			HpBar.value = maxHp;
-		}
-    }
-	
+
+
 	public void Damage(float damage)
 	{
 		if (maxHp <= 0) return;
@@ -71,6 +64,7 @@ public class HP : MonoBehaviour
 			{
 				HpBar.value -= 0.1f;//Slider‚ðŒ¸‚ç‚·
 			}
+			
 		}
 	}
 

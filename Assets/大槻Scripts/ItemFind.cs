@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class ItemFind : MonoBehaviour
 {
+	/*
+	[SerializeField] bool onhidhlight = true;
+	[SerializeField] GameObject recovery;
+	*/
+
+
 	//public string itemName = "Potion";
 	public string itemName = "Recovery";
 
