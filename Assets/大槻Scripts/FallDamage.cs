@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 
 public class FallDamage : MonoBehaviour
-{
+{/*
 	public float minFallDistance = 5f;         // この距離以下ならノーダメージ
 	public float maxFallDistance = 20f;        // この距離で最大ダメージ
 	//public float maxDamage = 10f;             // 最大ダメージ 
@@ -80,7 +80,7 @@ public class FallDamage : MonoBehaviour
 	{
 		// 地面との接地判定
 		return Physics.Raycast(transform.position, Vector3.down, 1.1f);
-	}
+	}*/
 }
 
 
