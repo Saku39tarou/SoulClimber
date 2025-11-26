@@ -153,7 +153,7 @@ public class SkySystem : MonoBehaviour
 			sky = Sky.Day;
 		}
 
-		if(sunPos >= 0 && sunPos <= 10)
+		if(sunPos >= 0 && sunPos <= 20)
 		{
 			switch (fadeState)
 			{

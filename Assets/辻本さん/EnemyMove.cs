@@ -67,9 +67,7 @@ public class EnemyMove : MonoBehaviour
 				Shot();
 				countTime = wateTime;
 			}
-			
 		}
-		
     }
 
 	private void OnTriggerStay(Collider other)
