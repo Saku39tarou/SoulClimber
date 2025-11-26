@@ -88,7 +88,7 @@ public class HP : MonoBehaviour
 		SceneManager.LoadScene("GameOver");
 	}
 
-	//
+	//落下ダメージ処理
 
 	public float minFallDistance = 5f;         // この距離以下ならノーダメージ
 	public float maxFallDistance = 20f;        // この距離で最大ダメージ
