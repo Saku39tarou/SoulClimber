@@ -29,6 +29,7 @@ public class ItemFind : MonoBehaviour
 		{
 			InventoryManager.Instance.AddItem(itemName);
 			Destroy(gameObject); // E‚Á‚ÄÁ‚·
+			
 		}
 	}
 }

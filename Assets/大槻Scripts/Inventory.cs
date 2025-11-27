@@ -6,40 +6,7 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-	//
-	/*
-	public GameObject HealItem1;
-	public GameObject HealItem2;
-	//public GameObject HealItem3;
-
-	Image HealItemPoint1;
-	Image HealItemPoint2;
-
-	void Start()
-	{
-		
-		HealItemPoint1 = GameObject.Find("HealItemPoint1").GetComponent<Image>();
-		HealItemPoint2 = GameObject.Find("HealItemPoint2").GetComponent<Image>();
-
-
-		HealItemPoint1.enabled = false;
-		HealItemPoint2.enabled = false;
-		
-	}
-
-	void OnTriggerEnter(Collider col)
-	{
-		if(col.gameObject.tag=="HealItemPoint1")
-		{
-			HealItemPoint1.enabled = true;
-		}
-		if (col.gameObject.tag == "HealItemPoint2")
-		{
-			HealItemPoint2.enabled = true;
-		}
-	}
-	*/
-	//
+	
 
 	[SerializeField] GameObject Button;
 

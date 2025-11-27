@@ -26,12 +26,32 @@ public class ItemPickup : MonoBehaviour
 				Destroy(gameObject); // 拾ったらアイテム消える
 				
 			}
+			
+			Button.SetActive(true);//アイテム取得するまで非表示
+			Debug.Log("アイコン表示");
+		}
 
+		if (other.gameObject.tag == "Player")
+		{
+			// プレイヤーが近づいた時
+			Debug.Log($"{itemName}を拾う");
+
+		}
+
+	}
+	public string itemName = "Recovery";
+
+
+	private void OnTriggerStay(Collider collision)
+	{
+		if (collision.gameObject.tag == "Player" && Input.GetKeyDown(KeyCode.Q))//タグがPlayerでQキーを押すと拾うことができる
+		{
+			InventoryManager.Instance.AddItem(itemName);
+			Destroy(gameObject); // 拾って消す
 			Button.SetActive(true);//アイテム取得するまで非表示
 			Debug.Log("アイコン表示");
 		}
 	}
-	
 
 }
 
