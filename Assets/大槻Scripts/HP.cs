@@ -49,6 +49,11 @@ public class HP : MonoBehaviour
 			HpBar.value -= 0.1f;
 			Destroy(collision.gameObject);
 		}
+		//player‚ªG‚ê‚Ä‚àÁ‚¦‚È‚¢
+		if(collision.CompareTag("EnemyDame"))
+		{
+			HpBar.value -= 0.1f;
+		}
 
 	}
 
