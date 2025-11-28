@@ -15,6 +15,7 @@ TagManager:
   - Ghost
   - Stage
   - PoisonGas
+  - EnemyDame
   layers:
   - Default
   - TransparentFX

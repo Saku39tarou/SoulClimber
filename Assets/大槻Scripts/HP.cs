@@ -57,8 +57,12 @@ public class HP : MonoBehaviour
 
 	}
 
+
 	//“Åƒ_ƒ[ƒW
 	private int count;
+
+	[SerializeField] GameObject gas;
+
 	private void OnTriggerStay(Collider other)
 	{
 		if (other.CompareTag("PoisonGas"))
@@ -69,7 +73,7 @@ public class HP : MonoBehaviour
 			{
 				HpBar.value -= 0.1f;//Slider‚ğŒ¸‚ç‚·
 			}
-
+			Destroy(gas,8);
 		}
 	}
 

@@ -661,9 +661,19 @@ PrefabInstance:
       objectReference: {fileID: 1491065298}
     - target: {fileID: 5601344500147980954, guid: 53cf0de1e66de4b4bb990c17fe1af5a9,
         type: 3}
+      propertyPath: gas
+      value: 
+      objectReference: {fileID: 1098969986}
+    - target: {fileID: 5601344500147980954, guid: 53cf0de1e66de4b4bb990c17fe1af5a9,
+        type: 3}
       propertyPath: HpBar
       value: 
       objectReference: {fileID: 1759101121}
+    - target: {fileID: 5601344500147980954, guid: 53cf0de1e66de4b4bb990c17fe1af5a9,
+        type: 3}
+      propertyPath: maxDamage
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 8345500117318079488, guid: 53cf0de1e66de4b4bb990c17fe1af5a9,
         type: 3}
       propertyPath: Button2
@@ -1577,6 +1587,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1604665851}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1098969986 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919161324445989310, guid: f4ab0a70549cc6349bcb71c251fe4d3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3408393008691695644}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1120605162
 PrefabInstance:
   m_ObjectHideFlags: 0
