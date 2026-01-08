@@ -24,12 +24,12 @@ public class SkySystem : MonoBehaviour
 	private float nextWaitTime;
 	public int dayCount = 1;
 
-	enum Sky
+	public enum Sky
 	{
 		Day,
 		Night,
 	}
-	[SerializeField] Sky sky;
+	public Sky skyState;
 
 	enum FadeState
 	{
@@ -111,7 +111,7 @@ public class SkySystem : MonoBehaviour
 			}
 			//if (fadeIn) FadeIn();
 			//if (fadeOut) FadeOut();
-			sky = Sky.Night;
+			skyState = Sky.Night;
 		}
 
 		if (sunPos >= 329 && sunPos < 329.5)
@@ -150,7 +150,7 @@ public class SkySystem : MonoBehaviour
 			//if (fadeIn) FadeIn();
 			//if (fadeOut) FadeOut();
 			sunPos = 0;
-			sky = Sky.Day;
+			skyState = Sky.Day;
 		}
 
 		if(sunPos >= 0 && sunPos <= 20)

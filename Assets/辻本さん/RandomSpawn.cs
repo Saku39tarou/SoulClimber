@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.LookDev;
 
 public class RandomSpawn : MonoBehaviour
 {
 	[SerializeField] GameObject bird;
 	[SerializeField] GameObject[] birdSpawnPos;
+	private SkySystem.Sky skySystem;
+	// Start is called before the first frame update
 
-
-    // Start is called before the first frame update
-    void Start()
+	
+	void OnEnable()
     {
+		
 		int truecount = 0;
 		int falsecount = 0;
 
@@ -53,6 +56,9 @@ public class RandomSpawn : MonoBehaviour
 	// Update is called once per frame
 	void Update()
     {
-        
+		//if(skySystem == SkySystem.Sky.Day)
+		//{
+		//	Destroy(bird);
+		//}
     }
 }
