@@ -14,7 +14,7 @@ public class PlayerHealth : MonoBehaviour
 
 	void Start()
 	{
-		currentHP = maxHP;
+		//currentHP = maxHP;
 		UpdateHPBar();
 	}
 
@@ -23,12 +23,14 @@ public class PlayerHealth : MonoBehaviour
 		currentHP += amount;
 		if (currentHP > maxHP)
 			currentHP = maxHP;
+		//hpBar.value += 0.1f;
 		UpdateHPBar();
 	}
 
 	void UpdateHPBar()
 	{
-		hpBar.value = (float)currentHP / maxHP;
+		//hpBar.value = (float)currentHP / maxHP;
+		hpBar.value += 0.1f;
 	}
 	
 }
