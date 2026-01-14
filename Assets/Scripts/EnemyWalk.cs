@@ -5,7 +5,8 @@ using UnityEngine.AI;
 
 public class EnemyWalk : MonoBehaviour
 {
-	[SerializeField] GameObject player; 
+	[SerializeField] GameObject attack;
+	[SerializeField] SkySystem skyObject;
 	[SerializeField] Transform[] goals;
 
 	[SerializeField] float distance;
@@ -30,6 +31,7 @@ public class EnemyWalk : MonoBehaviour
 		attackEnemy = false;
 		animator = GetComponent<Animator>();
 		attackTime = maxTime;
+		skyObject.GetComponent<SkySystem>();
 	}
 
 	void nextGoal()
@@ -48,7 +50,7 @@ public class EnemyWalk : MonoBehaviour
 	void EnemyAttack()
 	{
 		attackTime -= Time.deltaTime;
-		agent.destination = player.transform.position;
+		agent.destination = attack.transform.position;
 		agent.speed = enemySpeed;
 		animator.SetBool("Attack",true);
 
@@ -89,8 +91,11 @@ public class EnemyWalk : MonoBehaviour
 			{
 				if (Physics.Raycast(this.transform.position, posDelta, out RaycastHit hit)) //Ray‚ðŽg—p‚µ‚Ätarget‚É“–‚½‚Á‚Ä‚¢‚é‚©”»•Ê
 				{
-					attackEnemy = true;
-					this.gameObject.transform.LookAt(other.transform);
+					if (skyObject.skyState == SkySystem.Sky.Night)
+					{
+							attackEnemy = true;
+						this.gameObject.transform.LookAt(other.transform);
+					}
 				}
 			}
 		}
