@@ -310,6 +310,7 @@ MonoBehaviour:
   sunPos: 0
   alpha: 0
   skySituation: {fileID: 956289151}
+  randomSpaner: {fileID: 0}
   dayCount: 0
   skyState: 0
   fadeState: 0
@@ -3412,7 +3413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4792d8b78616b5c41a8a01c65c01df8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyRandomSpawner: {fileID: 1330962243}
+  randomSpawner: {fileID: 1330962244}
   skyObject: {fileID: 98388432}
 --- !u!1001 &1591948523
 PrefabInstance:
@@ -3607,7 +3608,7 @@ PrefabInstance:
     - target: {fileID: 7090415751809740201, guid: 97e31e30a45fd0f41822a6791eb71b3d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7519583867206020141, guid: 97e31e30a45fd0f41822a6791eb71b3d,
         type: 3}
@@ -3658,6 +3659,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9210465144246091281, guid: 97e31e30a45fd0f41822a6791eb71b3d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 9210465144246091281, guid: 97e31e30a45fd0f41822a6791eb71b3d,
         type: 3}

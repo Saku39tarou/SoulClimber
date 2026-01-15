@@ -4,29 +4,32 @@ using UnityEngine;
 
 public class SpawnerController : MonoBehaviour
 {
-	[SerializeField] GameObject enemyRandomSpawner;
+	[SerializeField] RandomSpawn randomSpawner;
 	[SerializeField] SkySystem skyObject;
 
-	
+	bool spawn = false;
 	
     // Start is called before the first frame update
     void Awake()
     {
 		skyObject.GetComponent<SkySystem>();
-        enemyRandomSpawner.SetActive(false);
+		randomSpawner.GetComponent<RandomSpawn>();
     }
 
     // Update is called once per frame
     void Update()
     {
 		
-        if(skyObject.skyState == SkySystem.Sky.Night)
+        if(skyObject.skyState == SkySystem.Sky.Night && spawn)
 		{
-			enemyRandomSpawner.SetActive(true);
+			spawn = false;
 		}
-		if(skyObject.skyState == SkySystem.Sky.Day)
+		if(skyObject.skyState == SkySystem.Sky.Day && !spawn)
 		{
-			enemyRandomSpawner.SetActive(false);
+			
+			randomSpawner.Spawn();
+			
+			spawn = true;
 		}
     }
 }

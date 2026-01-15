@@ -16,6 +16,8 @@ public class SkySystem : MonoBehaviour
 	private float alpha;
 	[SerializeField]
 	TextMeshProUGUI skySituation;
+	[SerializeField]
+	GameObject randomSpaner;
 	
 
 	//[SerializeField] bool fadeIn;
@@ -46,12 +48,14 @@ public class SkySystem : MonoBehaviour
 		//fadeIn = true;
 		//fadeOut = false;
 		skySituation.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-		SkyNames = new string[] { "朝", "もうすぐ日が沈む....", "夜", "もうすぐ夜が明ける..." };
+		SkyNames = new string[] { "朝　　　　　頂上を目指せ", "もうすぐ　　日が沈む....", "夜", "もうすぐ　　夜が明ける..." };
 		skySituation.text = "";
 	}
 
 	void Update()
 	{
+		Debug.Log(skySituation.text);
+
 		//X軸を回転させる
 		transform.eulerAngles = new Vector3(sunPos, 0, 0);
 
@@ -59,12 +63,12 @@ public class SkySystem : MonoBehaviour
 		sunPos += Time.deltaTime;
 
 
-		if (sunPos >= 159 && sunPos < 160)
+		if (sunPos >= 154 && sunPos < 154.5)
 		{
 			fadeState = FadeState.FadeStart;
 		}
 
-		if (sunPos >= 160 && sunPos <= 170)
+		if (sunPos >= 155 && sunPos <= 180)
 		{
 			//if (fadeIn) FadeIn();
 			//if (fadeOut) FadeOut();
@@ -85,11 +89,11 @@ public class SkySystem : MonoBehaviour
 			}
 		}
 
-		if (sunPos >= 179 && sunPos < 180)
+		if (sunPos >= 179 && sunPos < 179.5)
 		{
 			fadeState = FadeState.FadeStart;
 		}
-		if (sunPos >= 180 && sunPos <= 190)
+		if (sunPos >= 180 && sunPos <= 205)
 		{
 			switch (fadeState)
 			{
@@ -119,7 +123,7 @@ public class SkySystem : MonoBehaviour
 			fadeState = FadeState.FadeStart;
 		}
 
-		if (sunPos >= 330 && sunPos <= 340)
+		if (sunPos >= 330 && sunPos <= 355)
 		{
 			switch (fadeState)
 			{
@@ -153,7 +157,7 @@ public class SkySystem : MonoBehaviour
 			skyState = Sky.Day;
 		}
 
-		if(sunPos >= 0 && sunPos <= 20)
+		if(sunPos >= 0 && sunPos <= 25)
 		{
 			switch (fadeState)
 			{
@@ -183,7 +187,7 @@ public class SkySystem : MonoBehaviour
 		//	new WaitForSeconds(0.5f);
 		//}
 		
-		alpha += 0.001f;
+		alpha += 0.005f;
 		skySituation.color = new Color(0, 0, 0, alpha);
 		if (alpha >= 1)
 		{
