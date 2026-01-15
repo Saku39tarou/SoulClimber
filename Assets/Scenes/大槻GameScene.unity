@@ -658,6 +658,11 @@ PrefabInstance:
       propertyPath: Button
       value: 
       objectReference: {fileID: 1491065298}
+    - target: {fileID: 4851327306760853424, guid: 53cf0de1e66de4b4bb990c17fe1af5a9,
+        type: 3}
+      propertyPath: Button2
+      value: 
+      objectReference: {fileID: 1425222508}
     - target: {fileID: 5601344500147980954, guid: 53cf0de1e66de4b4bb990c17fe1af5a9,
         type: 3}
       propertyPath: gas
@@ -670,9 +675,24 @@ PrefabInstance:
       objectReference: {fileID: 1759101121}
     - target: {fileID: 5601344500147980954, guid: 53cf0de1e66de4b4bb990c17fe1af5a9,
         type: 3}
+      propertyPath: maxHp
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5601344500147980954, guid: 53cf0de1e66de4b4bb990c17fe1af5a9,
+        type: 3}
       propertyPath: maxDamage
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5601344500147980954, guid: 53cf0de1e66de4b4bb990c17fe1af5a9,
+        type: 3}
+      propertyPath: GameOverPanel
+      value: 
+      objectReference: {fileID: 462386314}
+    - target: {fileID: 5601344500147980954, guid: 53cf0de1e66de4b4bb990c17fe1af5a9,
+        type: 3}
+      propertyPath: GameOverShowPanel
+      value: 
+      objectReference: {fileID: 462386314}
     - target: {fileID: 8345500117318079488, guid: 53cf0de1e66de4b4bb990c17fe1af5a9,
         type: 3}
       propertyPath: Button2
@@ -2863,6 +2883,50 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5141899019036212134}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1538641785
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1538641787}
+  - component: {fileID: 1538641786}
+  m_Layer: 0
+  m_Name: GameOver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1538641786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538641785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf2650467ba88eb4f89670bccae6947a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1538641787
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538641785}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.89848, y: 1.1002448, z: -1.5816545}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1584750615
 GameObject:
   m_ObjectHideFlags: 0
@@ -4137,3 +4201,4 @@ SceneRoots:
   - {fileID: 1584750616}
   - {fileID: 434011025}
   - {fileID: 1303674118}
+  - {fileID: 1538641787}

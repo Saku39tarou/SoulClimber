@@ -120,6 +120,11 @@ public class HP : MonoBehaviour
 		HpBar.value = maxHP;
 		UpdateHPBar();
 		rb = GetComponent<Rigidbody>();
+
+		if (GameOverPanel != null)
+		{
+			GameOverPanel.SetActive(false);
+		}
 	}
 
 	void Update()
@@ -144,6 +149,11 @@ public class HP : MonoBehaviour
 
 			isFalling = false;
 		}
+		//HPが0になったらゲームを停止
+		if(HpBar.value<=0)
+		{
+			GameOver();
+		}
 	}
 
 	float CalculateFallDamage(float fallDistance)
@@ -155,6 +165,7 @@ public class HP : MonoBehaviour
 		return t * maxDamage;
 	}
 
+	//[SerializeField] GameObject GameOverShowPanel;
 	void ApplyDamage(float amount)
 	{
 		//currentHP -= amount;
@@ -162,6 +173,12 @@ public class HP : MonoBehaviour
 		//currentHP = Mathf.Max(currentHP, 0);
 		HpBar.value = Mathf.Max(HpBar.value, 0);
 		UpdateHPBar();
+
+		//if (currentHP <= 0)
+		/*if (maxHp <= 0)
+		{
+			GameOver();
+		}*/
 	}
 
 	void UpdateHPBar()
@@ -179,4 +196,22 @@ public class HP : MonoBehaviour
 		return Physics.Raycast(transform.position, Vector3.down, 1.1f);
 	}
 
+	[SerializeField] GameObject GameOverPanel;
+
+	//HPが0になったらゲームを一時停止
+	void GameOver()
+	{
+		
+		if (GameOverPanel != null)
+		{
+			GameOverPanel.SetActive(true);
+		}
+
+		Time.timeScale = 0;
+
+
+		Debug.Log("GameOver");
+		//GameOverText.GameOverShowPanel();//パネル表示
+		//SceneManager.LoadScene("GameOver");//シーン遷移
+	}
 }

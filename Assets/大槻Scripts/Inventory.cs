@@ -10,6 +10,7 @@ public class Inventory : MonoBehaviour
 
 	[SerializeField] GameObject Button;
 
+
 	//private int potionHealAmount = 0;
 	private float potionHealAmount = 0;
 	private bool hasPotion = false;
@@ -36,6 +37,7 @@ public class Inventory : MonoBehaviour
 			Debug.Log("アイテムがありません！");
 		}
 	}
+
 }
 
 
