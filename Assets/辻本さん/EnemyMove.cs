@@ -5,15 +5,15 @@ using UnityEngine.AI;
 
 public class EnemyMove : MonoBehaviour
 {
-	[SerializeField] Transform[] goals;
+	
 	[SerializeField] GameObject shotItem;
 	[SerializeField] float shotSpeed;
 	[SerializeField] GameObject enemyBody;
 
 	private float wateTime = 2.0f;
 	[SerializeField] float countTime;
-	private int destNum = 0;
-	private NavMeshAgent agent;
+	
+	
 
 	enum Mode
 	{
@@ -24,22 +24,9 @@ public class EnemyMove : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-		agent.destination = goals[destNum].position;
+       
+		
     }
-
-	void nextGoal()
-	{
-		destNum += 1;
-		if(destNum == goals.Length)
-		{
-			destNum = 0;
-		}
-
-		agent.destination = goals[destNum].position;
-
-		//Debug.Log(destNum);
-	}
 
 	void Shot()
 	{
@@ -53,10 +40,7 @@ public class EnemyMove : MonoBehaviour
     {
 		if(mode == Mode.Search)
 		{
-			if (agent.remainingDistance == 0)
-			{
-				nextGoal();
-			}
+			
 		}
 
 		if(mode == Mode.Attack)
@@ -74,7 +58,7 @@ public class EnemyMove : MonoBehaviour
 	{
 		if(other.CompareTag("Player"))
 		{
-			agent.speed = 0;
+			
 			enemyBody.transform.LookAt(other.transform);
 			
 			
@@ -86,7 +70,7 @@ public class EnemyMove : MonoBehaviour
 	{
 		if(other.CompareTag("Player"))
 		{
-			agent.speed = 3.5f;
+			
 			enemyBody.gameObject.transform.rotation = Quaternion.identity;
 			mode = Mode.Search;
 		}

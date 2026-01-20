@@ -16,8 +16,7 @@ public class SkySystem : MonoBehaviour
 	private float alpha;
 	[SerializeField]
 	TextMeshProUGUI skySituation;
-	[SerializeField]
-	GameObject randomSpaner;
+	
 	
 
 	//[SerializeField] bool fadeIn;
