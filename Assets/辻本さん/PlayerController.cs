@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -43,35 +44,38 @@ public class PlayerController : MonoBehaviour
 	private bool isGroundedPrev;
 	private bool isClimbing = false;
 
-	private bool isDashing = false;
+	private bool isDashing;
 	private float currentSpeed;
 
 	private State currentState = State.Normal;
 
 	// アニメーション
-	//private Animator animator;
+	private Animator animator;
 
 	// 入力
 	public void OnMove(InputAction.CallbackContext context)
 	{
 
 		inputMove = context.ReadValue<Vector2>();
-		// アニメーション
-		//animator.SetBool("Run", inputMove != Vector2.zero);
 	}
 
 	public void OnJump(InputAction.CallbackContext context)
 	{
 		if (currentState == State.Ghost) return; // ゴースト中はジャンプ禁止
-		if (!context.performed || !characterController.isGrounded) return;
+		if (!context.performed) return;
+		if (!characterController.isGrounded) return;
+
+		//if (!context.performed || !characterController.isGrounded) return;
 		verticalVelocity = jumpSpeed;
+		animator.SetTrigger("Jump");
+		//Debug.Log("OnJump");
 	}
 
 	private void Awake()
 	{
 		_transform = transform;
 		characterController = GetComponent<CharacterController>();
-		//animator = GetComponent<Animator>();
+		animator = GetComponent<Animator>();
 		if (targetCamera == null)
 			targetCamera = Camera.main;
 
@@ -93,8 +97,31 @@ public class PlayerController : MonoBehaviour
 				UpdateGhost();
 				break;
 		}
+
+		UpdateAnimator();
 	}
 
+
+	private void UpdateAnimator()
+	{
+		Vector3 horizontalVelocity = characterController.velocity;
+		horizontalVelocity.y = 0f;
+
+		// 移動量
+		animator.SetFloat("Speed", horizontalVelocity.magnitude);
+
+		// ダッシュ
+		animator.SetBool("Run", isDashing);
+
+		// 接地
+		animator.SetBool("IsGrounded", characterController.isGrounded);
+
+		// 落下
+		animator.SetFloat("yVelocity", verticalVelocity);
+
+		// 壁登り
+		animator.SetBool("IsClimbing", isClimbing);
+	}
 	// 通常
 	private void UpdateNormal()
 	{
@@ -117,7 +144,6 @@ public class PlayerController : MonoBehaviour
 				isTouchingWall = true;
 			}
 		}
-
 
 		// 壁登り
 		if (isTouchingWall && Input.GetMouseButton(0))
@@ -153,7 +179,7 @@ public class PlayerController : MonoBehaviour
 		}
 
 		// ダッシュ
-		if (Keyboard.current != null && Keyboard.current.leftShiftKey.isPressed && !isClimbing && isGrounded)
+		if (Keyboard.current.leftShiftKey.isPressed && !isClimbing && isGrounded)
 		{
 			isDashing = true;
 		}
@@ -161,6 +187,7 @@ public class PlayerController : MonoBehaviour
 		{
 			isDashing = false;
 		}
+		Debug.Log(isDashing);
 
 		float targetSpeed = isDashing ? dashSpeed : speed;
 		currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * dashAcceleration);
@@ -241,7 +268,7 @@ public class PlayerController : MonoBehaviour
 	public void SetState(State newState)
 	{
 		currentState = newState;
-		Debug.Log($"State changed to: {currentState}");
+		//Debug.Log($"State changed to: {currentState}");
 	}
 
 	public State GetState()
@@ -273,4 +300,3 @@ public class PlayerController : MonoBehaviour
 		Gizmos.DrawWireSphere(headPos, 0.1f);
 	}
 }
-
