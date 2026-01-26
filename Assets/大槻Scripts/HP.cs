@@ -74,6 +74,7 @@ public class HP : MonoBehaviour
 				HpBar.value -= 0.1f;//Sliderを減らす
 			}
 			Destroy(gas,8);
+			AudioSource.PlayClipAtPoint(myClip, transform.position);
 		}
 	}
 
@@ -95,6 +96,7 @@ public class HP : MonoBehaviour
 	void GoToGameover()
 	{
 		SceneManager.LoadScene("GameOver");
+		
 	}
 
 	//落下ダメージ処理
@@ -181,12 +183,19 @@ public class HP : MonoBehaviour
 		}*/
 	}
 
+	private void Awake()
+	{
+		//myClip=GetComponents<AudioClip>();
+	}
+
+	[SerializeField]AudioClip myClip;
 	void UpdateHPBar()
 	{
 		if (HpBar != null)
 		{
 			//HpBar.value = currentHP / maxHP;
 			HpBar.value =  HpBar.value/ maxHP;
+			AudioSource.PlayClipAtPoint(myClip, transform.position);
 		}
 	}
 
@@ -211,7 +220,7 @@ public class HP : MonoBehaviour
 
 
 		Debug.Log("GameOver");
-		//GameOverText.GameOverShowPanel();//パネル表示
+
 		//SceneManager.LoadScene("GameOver");//シーン遷移
 	}
 }
