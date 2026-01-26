@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
 	private float verticalVelocity;
 	private float turnVelocity;
 	private bool isGroundedPrev;
-	private bool isClimbing = false;
+	private bool isClimbing;
 
 	private bool isDashing;
 	private float currentSpeed;
@@ -109,9 +109,6 @@ public class PlayerController : MonoBehaviour
 
 		// 移動量
 		animator.SetFloat("Speed", horizontalVelocity.magnitude);
-
-		// ダッシュ
-		animator.SetBool("Run", isDashing);
 
 		// 接地
 		animator.SetBool("IsGrounded", characterController.isGrounded);
