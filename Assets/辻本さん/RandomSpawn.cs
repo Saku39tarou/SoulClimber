@@ -9,6 +9,7 @@ public class RandomSpawn : MonoBehaviour
 	[SerializeField] GameObject obj;
 	[SerializeField] GameObject[] objSpawnPos;
 	[SerializeField] int spawnValue;
+	[Header("true/falseValue‚Ì”’l‚ÍspawnValue‚æ‚è’á‚­İ’è‚µ‚Ä‚­‚¾‚³‚¢")]
 	[SerializeField] int trueValue;
 	[SerializeField] int falseValue;
 	private SkySystem.Sky skySystem;

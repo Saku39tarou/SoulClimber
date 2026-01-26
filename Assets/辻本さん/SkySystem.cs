@@ -9,9 +9,17 @@ public class SkySystem : MonoBehaviour
 {
 	public string[] SkyNames;
 
+	[SerializeField] GameObject sunLight;
+	[SerializeField] GameObject moonLight;
+	[SerializeField] GameObject moonObj;
+
 	//角度を入れる変数
 	[SerializeField]
 	private float sunPos;
+	[SerializeField] 
+	private float moonPos;
+
+
 	[SerializeField]
 	private float alpha;
 	[SerializeField]
@@ -46,6 +54,8 @@ public class SkySystem : MonoBehaviour
 	{
 		//fadeIn = true;
 		//fadeOut = false;
+	
+		
 		skySituation.color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
 		SkyNames = new string[] { "朝　　　　　頂上を目指せ", "もうすぐ　　日が沈む....", "夜", "もうすぐ　　夜が明ける..." };
 		skySituation.text = "";
@@ -55,11 +65,16 @@ public class SkySystem : MonoBehaviour
 	{
 		Debug.Log(skySituation.text);
 
+		if (moonPos == 360) moonPos = 0;
+
 		//X軸を回転させる
-		transform.eulerAngles = new Vector3(sunPos, 0, 0);
+		sunLight.transform.eulerAngles = new Vector3(sunPos, 0, 0);
+		moonLight.transform.eulerAngles = new Vector3 (moonPos + 180, 0, 0);
+		moonObj.transform.eulerAngles = new Vector3(moonPos + 90, 0, 0);
 
 		//1日のスピードを調節する
 		sunPos += Time.deltaTime;
+		moonPos += Time.deltaTime;
 
 
 		if (sunPos >= 154 && sunPos < 154.5)
@@ -107,9 +122,12 @@ public class SkySystem : MonoBehaviour
 				case FadeState.FadeIn:
 					skySituation.text = SkyNames[2];
 					if (fadeState == FadeState.FadeIn) FadeIn();
+					
 					break;
+
 				case FadeState.FadeOut:
 					if (fadeState == FadeState.FadeOut) FadeOut();
+					
 					break;
 			}
 			//if (fadeIn) FadeIn();
@@ -168,9 +186,11 @@ public class SkySystem : MonoBehaviour
 				case FadeState.FadeIn:
 					skySituation.text = SkyNames[0];
 					if (fadeState == FadeState.FadeIn) FadeIn();
-					break;
+					
+						break;
 				case FadeState.FadeOut:
 					if (fadeState == FadeState.FadeOut) FadeOut();
+					
 					break;
 			}
 		}
@@ -198,8 +218,9 @@ public class SkySystem : MonoBehaviour
 				//fadeOut = true;
 				fadeState = FadeState.FadeOut;
 			}
-
+			
 		}
+		
 	}
 
 	void FadeOut()
@@ -210,6 +231,7 @@ public class SkySystem : MonoBehaviour
 		//	new WaitForSeconds(0.1f);
 		//}
 		
+
 		alpha -= 0.001f;
 		skySituation.color = new Color(0, 0, 0, alpha);
 		if (alpha <= 0)
