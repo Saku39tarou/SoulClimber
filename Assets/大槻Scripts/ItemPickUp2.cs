@@ -16,7 +16,7 @@ public class ItemPickUp2 : MonoBehaviour
 	}
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("Player"))
+		if (other.CompareTag("Player")||other.CompareTag("ghost"))
 		{
 			Inventory2 inventory = other.GetComponent<Inventory2>();
 			if (inventory != null)
@@ -28,5 +28,6 @@ public class ItemPickUp2 : MonoBehaviour
 			Button2.SetActive(true);//アイテム取得するまで非表示
 			Debug.Log("アイコン表示");
 		}
+
 	}
 }

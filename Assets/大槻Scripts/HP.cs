@@ -74,6 +74,7 @@ public class HP : MonoBehaviour
 				HpBar.value -= 0.1f;//Slider‚ðŒ¸‚ç‚·
 			}
 			Destroy(gas,8);
+			//Audio = GetComponent<AudioSource>();
 			AudioSource.PlayClipAtPoint(myClip, transform.position);
 		}
 	}
@@ -127,6 +128,7 @@ public class HP : MonoBehaviour
 		{
 			GameOverPanel.SetActive(false);
 		}
+
 	}
 
 	void Update()
@@ -176,11 +178,6 @@ public class HP : MonoBehaviour
 		HpBar.value = Mathf.Max(HpBar.value, 0);
 		UpdateHPBar();
 
-		//if (currentHP <= 0)
-		/*if (maxHp <= 0)
-		{
-			GameOver();
-		}*/
 	}
 
 	private void Awake()
@@ -188,6 +185,7 @@ public class HP : MonoBehaviour
 		//myClip=GetComponents<AudioClip>();
 	}
 
+	//AudioSource Audio;
 	[SerializeField]AudioClip myClip;
 	void UpdateHPBar()
 	{
@@ -195,6 +193,7 @@ public class HP : MonoBehaviour
 		{
 			//HpBar.value = currentHP / maxHP;
 			HpBar.value =  HpBar.value/ maxHP;
+			//Audio = GetComponent<AudioSource>();
 			AudioSource.PlayClipAtPoint(myClip, transform.position);
 		}
 	}
