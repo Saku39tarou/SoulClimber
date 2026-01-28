@@ -4798,6 +4798,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 505199080}
     m_Modifications:
+    - target: {fileID: 825764603976598297, guid: 2fd271e869448594e915c37ad557dd4f,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8376399
+      objectReference: {fileID: 0}
     - target: {fileID: 1169077947061882319, guid: 2fd271e869448594e915c37ad557dd4f,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -4808,6 +4813,27 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1169077947061882319, guid: 2fd271e869448594e915c37ad557dd4f,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169077947061882319, guid: 2fd271e869448594e915c37ad557dd4f,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.025594
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607356492685132461, guid: 2fd271e869448594e915c37ad557dd4f,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5607356492685132461, guid: 2fd271e869448594e915c37ad557dd4f,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1100476230708988374, guid: 89aff9e18247bb647979c8e71d9dc5c7,
+        type: 3}
     - target: {fileID: 8389885462641631494, guid: 2fd271e869448594e915c37ad557dd4f,
         type: 3}
       propertyPath: m_Name
@@ -4816,7 +4842,7 @@ PrefabInstance:
     - target: {fileID: 8519743669049099690, guid: 2fd271e869448594e915c37ad557dd4f,
         type: 3}
       propertyPath: m_Interactable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8774753120525974160, guid: 2fd271e869448594e915c37ad557dd4f,
         type: 3}
@@ -4918,6 +4944,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8905616182647686067, guid: 2fd271e869448594e915c37ad557dd4f,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8905616182647686067, guid: 2fd271e869448594e915c37ad557dd4f,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4636151831804572175, guid: 5c6b1d8bbb4d72743bce6f67053ac941,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

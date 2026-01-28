@@ -48,11 +48,13 @@ public class HP : MonoBehaviour
 		{
 			HpBar.value -= 0.1f;
 			Destroy(collision.gameObject);
+			AudioSource.PlayClipAtPoint(myClip, transform.position);
 		}
 		//playerÇ™êGÇÍÇƒÇ‡è¡Ç¶Ç»Ç¢
 		if(collision.CompareTag("EnemyDame"))
 		{
 			HpBar.value -= 0.1f;
+			AudioSource.PlayClipAtPoint(myClip, transform.position);
 		}
 
 	}
