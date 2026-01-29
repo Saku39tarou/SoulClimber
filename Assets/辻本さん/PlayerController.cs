@@ -32,6 +32,10 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private float climbSpeed = 3f;
 	[SerializeField] private float wallCheckDistance = 0.6f;
 
+	[Header("壁判定")]
+	[SerializeField] private float wallSphereRadius = 0.4f;
+
+
 	[Header("ゴースト設定")]
 	[SerializeField] private float ghostSpeed = 5f;
 	[SerializeField] private float ghostVerticalSpeed = 3f;
@@ -47,6 +51,7 @@ public class PlayerController : MonoBehaviour
 	private bool isDashing;
 	private float currentSpeed;
 
+	private RaycastHit wallHit;
 	private State currentState = State.Normal;
 
 	// アニメーション
@@ -118,56 +123,57 @@ public class PlayerController : MonoBehaviour
 
 		// 壁登り
 		animator.SetBool("IsClimbing", isClimbing);
+		animator.SetFloat("ClimbSpeed", Mathf.Abs(inputMove.y));
 	}
 	// 通常
 	private void UpdateNormal()
 	{
 		bool isGrounded = characterController.isGrounded;
-
 		bool isTouchingWall = false;
 
-		// 壁判定
-		RaycastHit hit;
-		float sphereRadius = 0.4f;
+		float verticalInput = inputMove.y;
+		bool hasClimbInput = Mathf.Abs(verticalInput) > 0.1f;
 
-		// Rayを中心位置に
-		Vector3 start = _transform.position + Vector3.up * (characterController.height * 0.3f);
+		// SphereCastの始点を頭付近に変更
+		Vector3 start = _transform.position + Vector3.up * (characterController.height * 0.8f);
 
-		if (Physics.SphereCast(start, sphereRadius, _transform.forward, out hit, wallCheckDistance))
+		if (Physics.SphereCast(start, wallSphereRadius, _transform.forward, out wallHit, wallCheckDistance))
 		{
-			float wallDot = Vector3.Dot(hit.normal, Vector3.up);
+			float wallDot = Vector3.Dot(wallHit.normal, Vector3.up);
 			if (wallDot < 0.5f)
-			{
 				isTouchingWall = true;
-			}
 		}
 
-		// 壁登り
-		if (isTouchingWall && Input.GetMouseButton(0))
+		// 壁登り処理
+		if (isTouchingWall && Input.GetMouseButton(0) && hasClimbInput)
 		{
 			isClimbing = true;
+			verticalVelocity = 0f;
 
-			// 壁の法線方向を基に登る方向を計算
-			Vector3 climbDir = Vector3.ProjectOnPlane(Vector3.up, -hit.normal).normalized;
-		
-			// 上昇・下降
-			float inputVeertical = inputMove.y;
-			Vector3 climbMove = climbDir * (inputVeertical * climbSpeed);
+			// 壁法線取得
+			if (Physics.SphereCast(start, wallSphereRadius, _transform.forward, out wallHit, wallCheckDistance))
+			{
+				Vector3 wallNormal = wallHit.normal;
 
-			//壁に押し付ける力
-			climbMove += -hit.normal * 0.1f;
+				// 上方向成分も含めた登る方向
+				Vector3 climbDir = Vector3.Cross(Vector3.Cross(wallNormal, Vector3.up), wallNormal).normalized;
+				Vector3 move = climbDir * (verticalInput * climbSpeed) + Vector3.up * (verticalInput * climbSpeed)
+							   - wallNormal * 0.2f;
 
-			characterController.Move(climbMove * Time.deltaTime);
+				characterController.Move(move * Time.deltaTime);
 
-			// キャラの向きを壁の方向に合わせる
-			Quaternion targetRot = Quaternion.LookRotation(-hit.normal);
-			_transform.rotation = Quaternion.Slerp(_transform.rotation, targetRot, Time.deltaTime * 10f);
-			
-			// 登りきり判定
-			if(!Physics.Raycast(start, _transform.forward, out _, wallCheckDistance))
+				// 壁向き回転
+				Quaternion targetRot = Quaternion.LookRotation(-wallNormal);
+				_transform.rotation = Quaternion.Slerp(_transform.rotation, targetRot, Time.deltaTime * 20f);
+			}
+
+			// 壁登り中に登りきったかチェック
+			if (CheckClimbOver(wallHit))
 			{
 				isClimbing = false;
+				verticalVelocity = jumpSpeed * 0.5f; // 少し押し上げて自然に着地
 			}
+
 			return;
 		}
 		else
@@ -175,21 +181,16 @@ public class PlayerController : MonoBehaviour
 			isClimbing = false;
 		}
 
-		// ダッシュ
+		// ダッシュ処理
 		if (Keyboard.current.leftShiftKey.isPressed && !isClimbing && isGrounded)
-		{
 			isDashing = true;
-		}
 		else
-		{
 			isDashing = false;
-		}
-		Debug.Log(isDashing);
 
 		float targetSpeed = isDashing ? dashSpeed : speed;
 		currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * dashAcceleration);
 
-		// 重力
+		// 重力処理
 		if (!isClimbing)
 		{
 			if (isGrounded && !isGroundedPrev)
@@ -212,12 +213,13 @@ public class PlayerController : MonoBehaviour
 		// 向き
 		if (inputMove != Vector2.zero)
 		{
-			float targetAngleY = -Mathf.Atan2(inputMove.y, inputMove.x) * Mathf.Rad2Deg + 90;
+			float targetAngleY = -Mathf.Atan2(inputMove.y, inputMove.x) * Mathf.Rad2Deg + 90f;
 			targetAngleY += cameraAngleY;
 			float angleY = Mathf.SmoothDampAngle(_transform.eulerAngles.y, targetAngleY, ref turnVelocity, 0.1f);
 			_transform.rotation = Quaternion.Euler(0, angleY, 0);
 		}
 	}
+
 
 	// ゴースト
 	private void UpdateGhost()
@@ -245,15 +247,15 @@ public class PlayerController : MonoBehaviour
 	private bool CheckClimbOver(RaycastHit wallHit)
 	{
 		Vector3 headPos = _transform.position + Vector3.up * (characterController.height * 0.5f);
-		if(Physics.Raycast(headPos, Vector3.up, out RaycastHit upHit, 0.8f))
+		if (Physics.Raycast(headPos, Vector3.up, out RaycastHit upHit, 0.8f))
 		{
 			return false;
 		}
 
 		Vector3 forwardPos = _transform.position + (-wallHit.normal * 0.3f) + Vector3.up * 1.0f;
-		if(Physics.Raycast(forwardPos, Vector3.down, out RaycastHit groundHit, 1.5f))
+		if (Physics.Raycast(forwardPos, Vector3.down, out RaycastHit groundHit, 1.5f))
 		{
-			if(Vector3.Dot(groundHit.normal, Vector3.up) > 0.8f)
+			if (Vector3.Dot(groundHit.normal, Vector3.up) > 0.8f)
 			{
 				return true;
 			}
@@ -278,7 +280,7 @@ public class PlayerController : MonoBehaviour
 		if (_transform == null) _transform = transform;
 		if (characterController == null) characterController = GetComponent<CharacterController>();
 
-		float sphereRadius = 0.5f;
+		float sphereRadius = wallSphereRadius;
 		float distance = wallCheckDistance;
 
 		Vector3 start = _transform.position + Vector3.up * (characterController.height * 0.5f);

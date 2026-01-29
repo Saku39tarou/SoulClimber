@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 207519139}
   - component: {fileID: 207519138}
   - component: {fileID: 207519137}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1068,18 +1068,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5793602120352256701, guid: 53cf0de1e66de4b4bb990c17fe1af5a9,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5793602120352256701, guid: 53cf0de1e66de4b4bb990c17fe1af5a9,
+        type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 23bb918a0303cad45a3042cd34881ce3, type: 2}
     - target: {fileID: 5793602120352256701, guid: 53cf0de1e66de4b4bb990c17fe1af5a9,
         type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'metarig'\n\tTransform 'forearm.R'\n\tTransform
-        'shoulder.R'\n\tTransform 'thigh.L'\n\tTransform 'toe.L'\n\tTransform 'upper_arm.L'\n\tTransform
-        'spine.006'\n\tTransform 'shin.R'\n\tTransform 'spine.003'\n\tTransform 'metarig'\n\tand
-        more ...\n\tFrom animation clip 'mixamo.com'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5932990941119496637, guid: 53cf0de1e66de4b4bb990c17fe1af5a9,
         type: 3}
