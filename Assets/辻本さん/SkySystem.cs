@@ -70,7 +70,7 @@ public class SkySystem : MonoBehaviour
 		//X軸を回転させる
 		sunLight.transform.eulerAngles = new Vector3(sunPos, 0, 0);
 		moonLight.transform.eulerAngles = new Vector3 (moonPos + 180, 0, 0);
-		moonObj.transform.eulerAngles = new Vector3(moonPos + 90, 0, 0);
+		moonObj.transform.eulerAngles = new Vector3(moonPos +  90, 0, 0);
 
 		//1日のスピードを調節する
 		sunPos += Time.deltaTime;
@@ -171,6 +171,7 @@ public class SkySystem : MonoBehaviour
 			//if (fadeIn) FadeIn();
 			//if (fadeOut) FadeOut();
 			sunPos = 0;
+			moonPos = 0;
 			skyState = Sky.Day;
 		}
 

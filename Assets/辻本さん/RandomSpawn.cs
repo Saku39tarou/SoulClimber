@@ -13,9 +13,14 @@ public class RandomSpawn : MonoBehaviour
 	[SerializeField] int trueValue;
 	[SerializeField] int falseValue;
 	private SkySystem.Sky skySystem;
+
+	[SerializeField]List<GameObject> beeList = new List<GameObject>();
+	int objCount;
+	GameObject objs;
+	//[SerializeField]GameObject instance;
 	// Start is called before the first frame update
 
-	
+
 	void OnEnable()
     {
 
@@ -72,6 +77,12 @@ public class RandomSpawn : MonoBehaviour
 		int truecount = 0;
 		int falsecount = 0;
 
+		foreach (GameObject objs in beeList)
+		{
+			Destroy(objs);
+		}
+		beeList.Clear();
+
 		//9個のスポーン地点からランダムに4個敵を生成
 		for (int i = 0; i < spawnValue; i++)
 		{
@@ -99,9 +110,12 @@ public class RandomSpawn : MonoBehaviour
 				draw = true;
 			}
 
+			
 			if (draw)
 			{
-				Instantiate(obj, objSpawnPos[i].transform.position, objSpawnPos[i].transform.rotation);
+				objs = GameObject.Instantiate(obj, objSpawnPos[i].transform.position, objSpawnPos[i].transform.rotation);
+				beeList.Add(objs);
+				objCount++;
 			}
 		}
 

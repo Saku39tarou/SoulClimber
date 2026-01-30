@@ -7,7 +7,8 @@ public class SpawnerController : MonoBehaviour
 	[SerializeField] RandomSpawn randomSpawner;
 	[SerializeField] SkySystem skyObject;
 
-	bool spawn = false;
+	bool spawnDay = true;
+	bool spawnNight = false;
 	
     // Start is called before the first frame update
     void Awake()
@@ -20,16 +21,17 @@ public class SpawnerController : MonoBehaviour
     void Update()
     {
 		
-        if(skyObject.skyState == SkySystem.Sky.Night && spawn)
+        if(skyObject.skyState == SkySystem.Sky.Night && !spawnDay && spawnNight)
 		{
-			spawn = false;
-		}
-		if(skyObject.skyState == SkySystem.Sky.Day && !spawn)
-		{
-			
 			randomSpawner.Spawn();
-			
-			spawn = true;
+			spawnDay = true;
+			spawnNight = false;
+		}
+		if(skyObject.skyState == SkySystem.Sky.Day && spawnDay && !spawnNight)
+		{
+			randomSpawner.Spawn();
+			spawnDay = false;
+			spawnNight = true;
 		}
     }
 }
