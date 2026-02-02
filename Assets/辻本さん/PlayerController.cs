@@ -109,21 +109,25 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateAnimator()
     {
-        Vector3 horizontalVelocity = characterController.velocity;
-        horizontalVelocity.y = 0f;
+        if(currentState == State.Normal)
+        {
+            Vector3 horizontalVelocity = characterController.velocity;
+            horizontalVelocity.y = 0f;
 
-        // ˆÚ“®—Ê
-        animator.SetFloat("Speed", horizontalVelocity.magnitude);
+            // ˆÚ“®—Ê
+            animator.SetFloat("Speed", horizontalVelocity.magnitude);
+    
+            // Ú’n
+            animator.SetBool("IsGrounded", characterController.isGrounded);
 
-        // Ú’n
-        animator.SetBool("IsGrounded", characterController.isGrounded);
+            // —‰º
+            animator.SetFloat("yVelocity", verticalVelocity);
 
-        // —‰º
-        animator.SetFloat("yVelocity", verticalVelocity);
-
-        // •Ç“o‚è
-        animator.SetBool("IsClimbing", isClimbing);
-        animator.SetFloat("ClimbSpeed", Mathf.Abs(inputMove.y));
+            // •Ç“o‚è
+            animator.SetBool("IsClimbing", isClimbing);
+            animator.SetFloat("ClimbSpeed", Mathf.Abs(inputMove.y));
+        }
+       
     }
     // ’Êí
     private void UpdateNormal()
