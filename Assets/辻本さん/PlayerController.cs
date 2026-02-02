@@ -282,8 +282,7 @@ public class PlayerController : MonoBehaviour
         if (_transform == null) _transform = transform;
         if (characterController == null) characterController = GetComponent<CharacterController>();
 
-        Vector3 start = _transform.position
-            + Vector3.up * (characterController.height * 0.8f); // ÅöçáÇÌÇπÇÈ
+        Vector3 start = _transform.position + Vector3.up * (characterController.height * 0.8f);
 
         Vector3 end = start + _transform.forward * wallCheckDistance;
 
