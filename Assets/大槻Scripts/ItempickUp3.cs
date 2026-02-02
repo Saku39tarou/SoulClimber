@@ -2,32 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemPickUp2 : MonoBehaviour
+public class ItempickUp3 : MonoBehaviour
 {
-	[SerializeField] GameObject Button2;
-
+	[SerializeField] GameObject Button3;
 	//public int healAmount = 30;
-	public float healAmount = 0.1f;
+	public float healAmount = 0.4f;
 
 
 	private void Start()
 	{
-		Button2.SetActive(false);
+		Button3.SetActive(false);
 	}
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("Player")||other.CompareTag("ghost"))
+		if (other.CompareTag("Player") || other.CompareTag("ghost"))
 		{
-			Inventory2 inventory = other.GetComponent<Inventory2>();
+			Inventory3 inventory = other.GetComponent<Inventory3>();
 			if (inventory != null)
 			{
 				inventory.AddPotion(healAmount);
 				//Destroy(gameObject); // 拾ったらアイテム消える
 			}
 
-			Button2.SetActive(true);//アイテム取得するまで非表示
+			Button3.SetActive(true);//アイテム取得するまで非表示
 			Debug.Log("アイコン表示");
 		}
 
 	}
+		
 }

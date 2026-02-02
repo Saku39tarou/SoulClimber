@@ -13,6 +13,7 @@ public class InventoryManager : MonoBehaviour
 		else Destroy(gameObject);
 	}
 
+	
 	private List<string> items = new List<string>();
 	
 	public void AddItem(string itemName)
@@ -25,7 +26,6 @@ public class InventoryManager : MonoBehaviour
 	{
 		return items.Contains(itemName);
 		
-
 	}
 
 	public void UseItem(string itemName)
@@ -39,6 +39,11 @@ public class InventoryManager : MonoBehaviour
 		{
 			Debug.Log(itemName + "‚ğ‚Á‚Ä‚¢‚Ü‚¹‚ñB");
 		}
+	}
+	//
+	public void RemoveItem(string itemName)
+	{
+		items.Remove(itemName);
 	}
 }
 

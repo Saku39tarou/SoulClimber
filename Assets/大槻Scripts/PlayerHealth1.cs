@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth1 : MonoBehaviour
 {
 	public Slider hpBar;
 	//public float maxHP = 1;
-	public float maxHP = 0.1f;
+	public float maxHP = 0.4f;
 	public float currentHP;
 
 	void Start()
@@ -29,13 +29,6 @@ public class PlayerHealth : MonoBehaviour
 	void UpdateHPBar()
 	{
 		//hpBar.value = (float)currentHP / maxHP;
-		hpBar.value += 0.1f;
+		hpBar.value += 0.5f;
 	}
-	
 }
-
-
-
-
-
-

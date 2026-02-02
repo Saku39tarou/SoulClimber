@@ -34,7 +34,6 @@ public class HP : MonoBehaviour
 		}
 	}
 
-
 	//Unity側のHPBarの設定しているValueの値で設定する必要
 	private void OnTriggerEnter(Collider collision)
 	{
@@ -106,8 +105,9 @@ public class HP : MonoBehaviour
 
 	public float minFallDistance = 5f;         // この距離以下ならノーダメージ
 	public float maxFallDistance = 20f;        // この距離で最大ダメージ
-											   //public float maxDamage = 10f;             // 最大ダメージ 
-	public float maxDamage = 0.5f;             // 最大ダメージ
+											   //public float maxDamage = 10f;           
+	public float maxDamage = 1.0f;             // 最大ダメージ
+	//public float maxDamage = 0.5f;             // 最大ダメージ
 	//public float maxDamage = 0.1f;
 
 	//private float maxHP = 100f;
@@ -224,4 +224,5 @@ public class HP : MonoBehaviour
 
 		//SceneManager.LoadScene("GameOver");//シーン遷移
 	}
+
 }

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory2 : MonoBehaviour
+public class Inventory3 : MonoBehaviour
 {
-	[SerializeField] GameObject Button2;
+	[SerializeField] GameObject Button3;
 
 	//private int potionHealAmount = 0;
 	private float potionHealAmount = 0;
@@ -21,16 +21,15 @@ public class Inventory2 : MonoBehaviour
 	{
 		if (hasPotion)
 		{
-			PlayerHealth2 hp = GetComponent<PlayerHealth2>();
+			PlayerHealth1 hp = GetComponent<PlayerHealth1>();
 			hp.Heal(potionHealAmount);
 			hasPotion = false;
 			Debug.Log("アイテムを使用しました！");
-			Button2.SetActive(false);//アイコンをクリックすると使用しアイコンを削除
+			Button3.SetActive(false);//アイコンをクリックすると使用しアイコンを削除
 		}
 		else
 		{
 			Debug.Log("アイテムがありません！");
 		}
 	}
-	
 }

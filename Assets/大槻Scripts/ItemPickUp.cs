@@ -23,7 +23,7 @@ public class ItemPickup : MonoBehaviour
 			if (inventory != null)
 			{
 				inventory.AddPotion(healAmount);
-				Destroy(gameObject); // 拾ったらアイテム消える
+				//Destroy(gameObject); // 拾ったらアイテム消える
 				
 			}
 			
