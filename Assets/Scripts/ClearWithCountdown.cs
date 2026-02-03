@@ -13,7 +13,7 @@ public class ClearWithCountdown : MonoBehaviour
 
 	[Header("Countdown")]
 	[SerializeField] private float countdownSeconds = 3f;
-	[SerializeField] private bool cancelIfExit = true; // 範囲から出たらキャンセルするか
+	[SerializeField] private bool cancelIfExit = true; // 範囲から出たらキャンセルするかどうか
 
 	[Header("UI")]
 	[SerializeField] private TextMeshProUGUI countdownText;
@@ -60,7 +60,6 @@ public class ClearWithCountdown : MonoBehaviour
 
 		float t = countdownSeconds;
 
-		// 例：3.0〜2.0は「3」、2.0〜1.0は「2」…という表示
 		while (t > 0f)
 		{
 			int display = Mathf.CeilToInt(t);
@@ -72,7 +71,6 @@ public class ClearWithCountdown : MonoBehaviour
 			yield return null;
 		}
 
-		// 少しだけ見せたい場合
 		//yield return new WaitForSeconds(0.2f);
 
 		SceneManager.LoadScene(clearSceneName);

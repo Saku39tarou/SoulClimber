@@ -163,7 +163,7 @@ public class PlayerController : MonoBehaviour
                 Vector3 climbDir = Vector3.Cross(Vector3.Cross(wallNormal, Vector3.up), wallNormal).normalized;
                 //Vector3 move = climbDir * (verticalInput * climbSpeed) + Vector3.up * (verticalInput * climbSpeed)- wallNormal * 0.2f;
 
-                Vector3 move = Vector3.up * (verticalInput * climbSpeed) - wallNormal * 0.3f;
+                Vector3 move = Vector3.up * (verticalInput * climbSpeed) - wallNormal * 0.08f;
                 characterController.Move(move * Time.deltaTime);
 
                 // •ÇŒü‚«‰ñ“]

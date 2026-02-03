@@ -813,6 +813,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 207178038753459934, guid: 53cf0de1e66de4b4bb990c17fe1af5a9,
         type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 207178038753459934, guid: 53cf0de1e66de4b4bb990c17fe1af5a9,
+        type: 3}
+      propertyPath: gravity
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 207178038753459934, guid: 53cf0de1e66de4b4bb990c17fe1af5a9,
+        type: 3}
       propertyPath: dashSpeed
       value: 10
       objectReference: {fileID: 0}
