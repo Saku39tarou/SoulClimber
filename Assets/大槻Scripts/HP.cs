@@ -48,12 +48,14 @@ public class HP : MonoBehaviour
 			HpBar.value -= 0.1f;
 			Destroy(collision.gameObject);
 			AudioSource.PlayClipAtPoint(myClip, transform.position);
+			//AudioSource.PlayClipAtPoint(se, transform.position);
 		}
 		//playerが触れても消えない
 		if(collision.CompareTag("EnemyDame"))
 		{
 			HpBar.value -= 0.1f;
 			AudioSource.PlayClipAtPoint(myClip, transform.position);
+			//AudioSource.PlayClipAtPoint(se, transform.position);
 		}
 
 	}
@@ -107,11 +109,11 @@ public class HP : MonoBehaviour
 	//public float minFallDistance = 5f;         // この距離以下ならノーダメージ
 	public float maxFallDistance = 20f;        // この距離で最大ダメージ
 											   //public float maxDamage = 10f;           
-	public float maxDamage = 1.0f;             // 最大ダメージ
+	public float maxDamage = 0.1f;             // 最大ダメージ
 	//public float maxDamage = 0.5f;             // 最大ダメージ
-	//public float maxDamage = 0.1f;
+	//public float maxDamage = 3f;
 
-	//private float maxHP = 100f;
+	//private float maxHP = 0.9f;
 	private float maxHP = 1f;
 	//private float currentHP;
 
@@ -196,10 +198,11 @@ public class HP : MonoBehaviour
 		{
 			//HpBar.value = currentHP / maxHP;
 			HpBar.value =  HpBar.value/ maxHP;
-			//Audio = GetComponent<AudioSource>();
+			//AudioSource.PlayClipAtPoint(se, transform.position);
 			AudioSource.PlayClipAtPoint(myClip, transform.position);
 		}
 	}
+
 
 	bool IsGrounded()
 	{

@@ -14,6 +14,8 @@ public class ItemPickUp2 : MonoBehaviour
 	{
 		Button2.SetActive(false);
 	}
+
+	[SerializeField] AudioClip se;
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("Player")||other.CompareTag("ghost"))
@@ -24,7 +26,7 @@ public class ItemPickUp2 : MonoBehaviour
 				inventory.AddPotion(healAmount);
 				//Destroy(gameObject); // 拾ったらアイテム消える
 			}
-
+			AudioSource.PlayClipAtPoint(se, transform.position);
 			Button2.SetActive(true);//アイテム取得するまで非表示
 			Debug.Log("アイコン表示");
 		}

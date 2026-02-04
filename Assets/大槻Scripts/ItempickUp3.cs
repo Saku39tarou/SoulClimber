@@ -13,6 +13,7 @@ public class ItempickUp3 : MonoBehaviour
 	{
 		Button3.SetActive(false);
 	}
+	[SerializeField] AudioClip se;
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("Player") || other.CompareTag("ghost"))
@@ -23,7 +24,10 @@ public class ItempickUp3 : MonoBehaviour
 				inventory.AddPotion(healAmount);
 				//Destroy(gameObject); // 拾ったらアイテム消える
 			}
-
+		
+			
+				AudioSource.PlayClipAtPoint(se, transform.position);
+			
 			Button3.SetActive(true);//アイテム取得するまで非表示
 			Debug.Log("アイコン表示");
 		}

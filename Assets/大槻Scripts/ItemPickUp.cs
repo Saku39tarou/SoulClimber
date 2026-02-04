@@ -15,6 +15,7 @@ public class ItemPickup : MonoBehaviour
 	{
 		Button.SetActive(false);
 	}
+	[SerializeField] AudioClip se;
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("Player")||other.CompareTag("Ghost"))
@@ -26,7 +27,8 @@ public class ItemPickup : MonoBehaviour
 				//Destroy(gameObject); // 拾ったらアイテム消える
 				
 			}
-			
+
+			AudioSource.PlayClipAtPoint(se, transform.position);
 			Button.SetActive(true);//アイテム取得するまで非表示
 			Debug.Log("アイコン表示");
 		}
