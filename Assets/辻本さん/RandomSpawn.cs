@@ -10,11 +10,11 @@ public class RandomSpawn : MonoBehaviour
 	[SerializeField] GameObject[] objSpawnPos;
 	[SerializeField] int spawnValue;
 	[Header("true/falseValueの数値はspawnValueより低く設定してください")]
-	[SerializeField] int trueValue;
-	[SerializeField] int falseValue;
+	public int trueValue;
+	public int falseValue;
 	private SkySystem.Sky skySystem;
 
-	[SerializeField]List<GameObject> beeList = new List<GameObject>();
+	[SerializeField]List<GameObject> objsList = new List<GameObject>();
 	int objCount;
 	GameObject objs;
 	//[SerializeField]GameObject instance;
@@ -77,11 +77,11 @@ public class RandomSpawn : MonoBehaviour
 		int truecount = 0;
 		int falsecount = 0;
 
-		foreach (GameObject objs in beeList)
+		foreach (GameObject objs in objsList)
 		{
 			Destroy(objs);
 		}
-		beeList.Clear();
+		objsList.Clear();
 
 		//9個のスポーン地点からランダムに4個敵を生成
 		for (int i = 0; i < spawnValue; i++)
@@ -114,7 +114,7 @@ public class RandomSpawn : MonoBehaviour
 			if (draw)
 			{
 				objs = GameObject.Instantiate(obj, objSpawnPos[i].transform.position, objSpawnPos[i].transform.rotation);
-				beeList.Add(objs);
+				objsList.Add(objs);
 				objCount++;
 			}
 		}
