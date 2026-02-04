@@ -208,6 +208,7 @@ public class SkySystem : MonoBehaviour
 		//}
 		
 		alpha += 0.005f;
+		alpha = Mathf.Clamp01(alpha);
 		skySituation.color = new Color(0, 0, 0, alpha);
 		if (alpha >= 1)
 		{
@@ -234,6 +235,7 @@ public class SkySystem : MonoBehaviour
 		
 
 		alpha -= 0.001f;
+		alpha = Mathf.Clamp01(alpha);
 		skySituation.color = new Color(0, 0, 0, alpha);
 		if (alpha <= 0)
 		{

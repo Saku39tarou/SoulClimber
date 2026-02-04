@@ -17,7 +17,7 @@ public class ItemPickup : MonoBehaviour
 	}
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("Player")||other.CompareTag("ghost"))
+		if (other.CompareTag("Player")||other.CompareTag("Ghost"))
 		{
 			Inventory inventory = other.GetComponent<Inventory>();
 			if (inventory != null)
