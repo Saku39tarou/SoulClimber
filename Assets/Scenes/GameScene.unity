@@ -4146,6 +4146,79 @@ MonoBehaviour:
   hpBar: {fileID: 846344358}
   maxHP: 0.4
   currentHP: 0
+--- !u!1001 &736892591
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4137003397848496695, guid: ddc702e6aac9ff043bf8892aa58d03d0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 475.6695
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137003397848496695, guid: ddc702e6aac9ff043bf8892aa58d03d0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.1604607
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137003397848496695, guid: ddc702e6aac9ff043bf8892aa58d03d0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.5430145
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137003397848496695, guid: ddc702e6aac9ff043bf8892aa58d03d0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7072302
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137003397848496695, guid: ddc702e6aac9ff043bf8892aa58d03d0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7069834
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137003397848496695, guid: ddc702e6aac9ff043bf8892aa58d03d0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137003397848496695, guid: ddc702e6aac9ff043bf8892aa58d03d0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137003397848496695, guid: ddc702e6aac9ff043bf8892aa58d03d0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -89.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137003397848496695, guid: ddc702e6aac9ff043bf8892aa58d03d0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4137003397848496695, guid: ddc702e6aac9ff043bf8892aa58d03d0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7245489295040508885, guid: ddc702e6aac9ff043bf8892aa58d03d0,
+        type: 3}
+      propertyPath: Button2
+      value: 
+      objectReference: {fileID: 858197158}
+    - target: {fileID: 8109536530088256526, guid: ddc702e6aac9ff043bf8892aa58d03d0,
+        type: 3}
+      propertyPath: m_Name
+      value: watermelon 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ddc702e6aac9ff043bf8892aa58d03d0, type: 3}
 --- !u!1 &756572539 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6339395409707821234, guid: 0fd3b4cfbdcc48745a8bc1ea6bb499e9,
@@ -19202,3 +19275,4 @@ SceneRoots:
   - {fileID: 1019131264}
   - {fileID: 1893450641}
   - {fileID: 365092145}
+  - {fileID: 736892591}

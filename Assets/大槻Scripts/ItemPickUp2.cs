@@ -18,7 +18,7 @@ public class ItemPickUp2 : MonoBehaviour
 	[SerializeField] AudioClip se;
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("Player")||other.CompareTag("ghost"))
+		if (other.CompareTag("Player")||other.CompareTag("Ghost"))
 		{
 			Inventory2 inventory = other.GetComponent<Inventory2>();
 			if (inventory != null)
