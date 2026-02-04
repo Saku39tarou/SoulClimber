@@ -103,7 +103,8 @@ public class HP : MonoBehaviour
 
 	//落下ダメージ処理
 
-	public float minFallDistance = 5f;         // この距離以下ならノーダメージ
+	public float minFallDistance = 3f;         // この距離以下ならノーダメージ
+	//public float minFallDistance = 5f;         // この距離以下ならノーダメージ
 	public float maxFallDistance = 20f;        // この距離で最大ダメージ
 											   //public float maxDamage = 10f;           
 	public float maxDamage = 1.0f;             // 最大ダメージ
