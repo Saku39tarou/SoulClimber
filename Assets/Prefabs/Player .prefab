@@ -519,22 +519,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 314cb0ce917614d4fa2aae5a18093069,
         type: 3}
       insertIndex: 3
-      addedObject: {fileID: 2870533502455079282}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 314cb0ce917614d4fa2aae5a18093069,
-        type: 3}
-      insertIndex: 4
       addedObject: {fileID: -3767723694162543526}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 314cb0ce917614d4fa2aae5a18093069,
         type: 3}
-      insertIndex: 5
+      insertIndex: 4
       addedObject: {fileID: 4921851242259209702}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 314cb0ce917614d4fa2aae5a18093069,
         type: 3}
-      insertIndex: 6
+      insertIndex: 5
       addedObject: {fileID: 2491707028140199302}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 314cb0ce917614d4fa2aae5a18093069,
         type: 3}
-      insertIndex: 7
+      insertIndex: 6
       addedObject: {fileID: 5601344500147980954}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 314cb0ce917614d4fa2aae5a18093069,
         type: 3}
@@ -591,19 +587,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Button2: {fileID: 0}
---- !u!114 &2870533502455079282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 994448991913923197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2067a63bb89359c4687a5ba582bc9b4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Button3: {fileID: 0}
 --- !u!114 &-3767723694162543526
 MonoBehaviour:
   m_ObjectHideFlags: 0
