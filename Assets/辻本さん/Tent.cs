@@ -5,37 +5,35 @@ public class Tent : MonoBehaviour
 	[SerializeField] private GameObject climbPlayer;
 	[SerializeField] private GameObject ghostPlayer;
 	[SerializeField] private Transform waitPos;
-
 	[SerializeField] private SkySystem skySystem;
 
 	private bool onPlayer = false;
 	private bool onGhost = false;
 
-	private SkySystem.Sky prevSkyState;
+	// 「その日の朝に強制復帰を実行したか」
+	private bool forcedThisDay = false;
 
 	void Start()
 	{
 		ghostPlayer.SetActive(false);
-
-		if (skySystem != null)
-			prevSkyState = skySystem.skyState;
 	}
 
 	void Update()
 	{
 		if (skySystem != null)
 		{
-			bool becameMorning = (prevSkyState == SkySystem.Sky.Night && skySystem.skyState == SkySystem.Sky.Day);
-
-			if (becameMorning)
+			// Nightになったら翌日に備えてリセット
+			if (skySystem.skyState == SkySystem.Sky.Night)
 			{
-				if (ghostPlayer.activeSelf)
-				{
-					ForceBackToPlayer();
-				}
+				forcedThisDay = false;
 			}
 
-			prevSkyState = skySystem.skyState;
+			// Day中にゴーストなら必ず戻す（取り逃し無し）
+			if (skySystem.skyState == SkySystem.Sky.Day && !forcedThisDay && ghostPlayer.activeSelf)
+			{
+				forcedThisDay = true;
+				ForceBackToPlayer();
+			}
 		}
 
 		// 通常プレイヤー → ゴースト
@@ -67,11 +65,9 @@ public class Tent : MonoBehaviour
 		}
 	}
 
-	// 朝になったら強制的にPlayerに戻す
 	private void ForceBackToPlayer()
 	{
-		Debug.Log("朝になったので、ゴーストを強制的にPlayerへ戻します");
-
+		Debug.Log("朝(Day)なので、ゴーストを強制的にPlayerへ戻します");
 
 		ghostPlayer.transform.position = waitPos.position;
 		ghostPlayer.SetActive(false);
@@ -79,7 +75,6 @@ public class Tent : MonoBehaviour
 		climbPlayer.transform.position = waitPos.position;
 		climbPlayer.SetActive(true);
 
-		
 		var playerController = climbPlayer.GetComponent<PlayerController>();
 		if (playerController != null)
 			playerController.SetState(PlayerController.State.Normal);
